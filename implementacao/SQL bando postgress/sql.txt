@@ -1,0 +1,9 @@
+CREATE DATABASE "gestaoCar";
+
+CREATE TABLE public."Estados"
+(
+    est_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
+    est_nome character varying NOT NULL,
+    PRIMARY KEY (est_id)
+        INCLUDE(est_id)
+);
