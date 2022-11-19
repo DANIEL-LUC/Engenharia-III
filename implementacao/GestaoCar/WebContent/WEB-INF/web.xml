@@ -32,4 +32,8 @@
     <servlet-name>Controle</servlet-name>
     <url-pattern>/ConsultarTudo</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>Controle</servlet-name>
+    <url-pattern>/CadastrarVendedor</url-pattern>
+  </servlet-mapping>
 </web-app>

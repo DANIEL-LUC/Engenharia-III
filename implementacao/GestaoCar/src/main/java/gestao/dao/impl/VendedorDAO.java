@@ -106,10 +106,19 @@ public class VendedorDAO extends AbstractJdbcDAO {
 		List<EntidadeDominio> listVendedores = new ArrayList();
 		
 		String sql = null;
-		if(entidade == null) {
-			sql = "SELECT * FROM vendedores;";
+		
+		System.out.println("________Vendedore DAO --> entidade.getID() = " + entidade.getId());
+		if(entidade.getId() != 0) {
+			if(entidade.getId() == -1) {
+				sql = "SELECT * FROM vendedores;";
+			}else{
+				sql = "SELECT * FROM vendedores WHERE ven_id = ";
+				sql += entidade.getId() + ";";
+				}
 		}
-		sql = "SELECT * FROM vendedores;";
+		
+		System.out.println("________SQL => " + sql);
+		
         try{
         	connection.setAutoCommit(false);
         	System.out.println("________Dentro do try do VendedorDAO " + sql);
@@ -129,6 +138,7 @@ public class VendedorDAO extends AbstractJdbcDAO {
             	listVendedores.add(vendedor);            
             }
             connection.commit();
+            System.out.println("________ Query executada entidade => " + listVendedores.get(0).getId());
             return listVendedores;
 	
         

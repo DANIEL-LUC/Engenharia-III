@@ -10,7 +10,7 @@
 <h1>MENU</h1>
 <p><a href="cadastrarCar.jsp" >Cadastrar Automovel</a>.</p>
 <p><a href="cadastrarCar.jsp" >Consultar Automovel</a>.</p>
-<p><a href="cadastrarVendedor.jsp" >Cadastrar Vendedor</a>.</p>
+<p><a href="CadastrarVendedor" >Cadastrar Vendedor</a>.</p>
 <p><a href="Vendedor" >Consultar Vendedor</a>.</p>
 </body>
 </body>

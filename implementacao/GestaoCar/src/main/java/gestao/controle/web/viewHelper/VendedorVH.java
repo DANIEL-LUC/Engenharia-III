@@ -21,6 +21,7 @@ public class VendedorVH implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		System.out.println("DENTRO DA VIEW HELPER");
+		String operacao = request.getParameter("operacao");
 		
 		String id = request.getParameter("txtId");
 		String cpf = request.getParameter("txtCPF");
@@ -36,7 +37,18 @@ public class VendedorVH implements IViewHelper {
 		
 		
 		Vendedor v = new Vendedor();
-
+		System.out.println("Dentro da VH VEndedore operacao = " + operacao);
+		if(operacao != null) {
+			if(operacao.equals("Editar") || operacao.equals("Consultar")) {
+				System.out.println("Dentro do is VH VEndedore id = " + id);
+				
+				v.setId(Integer.parseInt(id));
+			}
+		}else {
+			v.setId(-1);
+			return v;
+		}
+		
 		v.setCpf(cpf);
 		v.setEmail(email);
 		v.setNome(nomeVendedor);
@@ -48,7 +60,8 @@ public class VendedorVH implements IViewHelper {
 		v.getEndereco().setComplemento(complemento);
 		v.getEndereco().setNumero(numero);
 				
-		System.out.println("VENDEDOR = " + v.getEndereco().getCidade().getEstado().getNome());
+		System.out.println("VENDEDOR = " + v.getId());
+		System.out.println("________VendedoreVH --> entidade = " + v);
 		return v;
 	}
 
@@ -63,7 +76,7 @@ public class VendedorVH implements IViewHelper {
 		
 		if(resultado.getMsg() == null){
 			
-			if(operacao == null ) {
+			if(operacao == null) {
 				resultado.setMsg("Lista de Vendedores!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
@@ -71,7 +84,12 @@ public class VendedorVH implements IViewHelper {
 				resultado.setMsg("Produto cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
-			}	
+			}else if(operacao.equals("Consultar")) {
+				resultado.setMsg("Lista de Vendedores!");
+				request.getSession().setAttribute("resultado", resultado);
+				d= request.getRequestDispatcher("cadastrarVendedor.jsp"); 
+			}
+			
 					 			
 		}
 		

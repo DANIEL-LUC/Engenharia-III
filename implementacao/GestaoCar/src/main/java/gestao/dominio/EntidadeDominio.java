@@ -2,7 +2,7 @@ package gestao.dominio;
 
 public abstract class EntidadeDominio {
 
-	private int id;
+	private Integer id;
 
 	private long dtCadastro;
 	

@@ -58,12 +58,12 @@
 
 						sbRegistro.append("<TR ALIGN='CENTER'>");
 
-						sbLink.append("<a href=SalvarProduto?");
+						sbLink.append("<a href=Vendedor?");
 						sbLink.append("txtId=");
 						sbLink.append(p.getId());
 						sbLink.append("&");
 						sbLink.append("operacao=");
-						sbLink.append("VISUALIZAR");
+						sbLink.append("Consultar");
 
 						sbLink.append(">");
 

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gestao.controle.web.command.ConsultarCommand;
+import gestao.controle.web.command.EditarCommand;
 import gestao.controle.web.command.ICommand;
 import gestao.controle.web.command.SalvarCommand;
 import gestao.controle.web.viewHelper.AutomovelVH;
@@ -42,6 +43,7 @@ public class Controle extends HttpServlet {
 		commands = new HashMap<String, ICommand>();
 		commands.put("Salvar", new SalvarCommand());
 		commands.put("Consultar", new ConsultarCommand());
+		commands.put("Editar", new EditarCommand());
      
     }
     
@@ -75,7 +77,7 @@ public class Controle extends HttpServlet {
 
 		if(operacao != null) {
 			ICommand command = commands.get(operacao);
-			System.out.println("COmmand  = ="+command.getClass().getName());
+			System.out.println("Command  = ="+command.getClass().getName());
 
 			Resultado resultado = command.executar(entidade);
 
@@ -86,15 +88,20 @@ public class Controle extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doProcessRequest(request, response);
+		uri = request.getRequestURI();
+		if(uri.equals("/GestaoCar/CadastrarVendedor")) { 
+			Resultado resultado = null;
+			request.getSession().setAttribute("resultado", resultado);
+			request.getRequestDispatcher("cadastrarVendedor.jsp").forward(request, response);
+			} else doProcessRequest(request, response);
+		
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
+		String id = request.getParameter("txtId");
+		System.out.println("----------->Resquest ID " + id) ;
 		doProcessRequest(request, response);
 	}
 

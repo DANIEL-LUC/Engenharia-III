@@ -15,7 +15,6 @@ import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
 import gestao.util.Resultado;
 
-
 public class Fachada implements IFachada {
 
 	private AbstractCommand abstractCommand;
@@ -84,9 +83,35 @@ public class Fachada implements IFachada {
 	}
 
 
-	public Resultado alterar(EntidadeDominio entidade) {
+	public Resultado editar(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();	
 		
-		return null;
+		
+		IDAO dao = daos.get(nmClasse);
+		dao.alterar(entidade);
+		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+		entidades.add(0, entidade);
+		resultado.setEntidades(entidades);
+		
+		
+		
+		//String msg = executarRegras(entidade, "Editar");
+	
+//		if(msg == null){
+//			IDAO dao = daos.get(nmClasse);
+//			dao.alterar(entidade);
+//			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+//			entidades.add(0, entidade);
+//			resultado.setEntidades(entidades);
+//		}else{
+//			resultado.setMsg(msg);
+//					
+//			
+//		}
+		
+		return resultado;
+
 	}
 
 	public Resultado excluir(EntidadeDominio entidade) {
