@@ -18,7 +18,7 @@
 	%>
 
 
-	<a href="cadastrarVendedor.jsp">Novo</a>
+	<a href="CadastrarVendedor">Novo</a>
 
 	<%
 		if (resultado != null && resultado.getMsg() != null) {

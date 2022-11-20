@@ -15,11 +15,14 @@
 			Resultado resultado = (Resultado) session.getAttribute("resultado");
 			String titulo;
 			String operacao;
+			String botao;
 			if (resultado != null) {
-				 titulo = "Editar";
+				 titulo = "Editar"; 
+				 botao = "<input type=\"submit\" name = \"operacao\" value=\"Editar\" id=\"botaoSalvar\">";
 			}else{
 				titulo = "Cadastrar";
 				operacao = "Salvar";
+				botao = "<input type=\"submit\" name = \"operacao\" value=\"Salvar\" id=\"botaoSalvar\">";
 			}
 			
 			out.print("<h1>"+ titulo+"</h1>");
@@ -66,27 +69,24 @@
 
                     <div class="campoLogradouro campoPadrao mesma-linha">
                         <label>Logradouro</label>
-                        <input type="text" class="logradouro" id="txtLogradouro" name="txtLogradouro" required="required" value="Rua narciso"><br>
+                        <input type="text" class="logradouro" id="txtLogradouro" name="txtLogradouro" required="required" value=<c:out value="${resultado.getEntidades().get(0).getEndereco().getLogradouro()}"/> ><br>
                     </div><br>
 
                     <div class="campoNumero campoPadrao mesma-linha">
                         <label>Número</label>
-                        <input type="text" id="txtNumero" name="txtNumero" required="required" value="555"><br>         
+                        <input type="text" id="txtNumero" name="txtNumero" required="required" value=<c:out value="${resultado.getEntidades().get(0).getEndereco().getNumero()}"/> ><br>         
                     </div><br>
 
                     <div class="campoCEP campoPadrao mesma-linha">
                         <label>CEP</label> 
-                        <input type="text" class="cep" id="txtCep" name="txtCep" minlength="9" required="required" value="08970000"><br>          
+                        <input type="text" class="cep" id="txtCep" name="txtCep" minlength="9" required="required" value=<c:out value="${resultado.getEntidades().get(0).getEndereco().getCep()}"/> ><br>          
                     </div>
                     <br>
-                    <div class="campoBairro campoPadrao mesma-linha">
-                        <label>Bairro</label>
-                        <input type="text" class="bairro" id="txtBairro" name="txtBairro" required="required" value="Bracaia"><br>
-                    </div><br>
+                   
 
                     <div class="campoCidade campoPadrao mesma-linha">
                         <label>Cidade</label>
-                        <input type="text" class="cidade" id="txtCidade" name="txtCidade" required="required" value="Salesopolis"><br>
+                        <input type="text" class="cidade" id="txtCidade" name="txtCidade" required="required" value=<c:out value="${resultado.getEntidades().get(0).getEndereco().getCidade().getNome()}"/> ><br>
                     </div><br>
                     
                     <div class="campoUF campoPadrao mesma-linha">
@@ -109,7 +109,8 @@
         
 		<br/>
 		<div class="formulario">
-                <input type="submit" name = "operacao" value="Salvar" id="botaoSalvar">
+			<% out.print(botao);%>
+                
         </div> 
 	</form>
 

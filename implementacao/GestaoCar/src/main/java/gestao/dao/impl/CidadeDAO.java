@@ -4,12 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import gestao.dao.AbstractJdbcDAO;
 import gestao.dominio.Cidade;
+import gestao.dominio.Endereco;
 import gestao.dominio.EntidadeDominio;
 import gestao.dominio.Estado;
+import gestao.dominio.Vendedor;
 
 public class CidadeDAO extends AbstractJdbcDAO {
 
@@ -53,10 +56,11 @@ public class CidadeDAO extends AbstractJdbcDAO {
 			pst.executeUpdate();		
 					
 			ResultSet rs = pst.getGeneratedKeys();
-			int idEst=0;
+			int idCid=0;
 			if(rs.next())
-				idEst = rs.getInt(1);
-			est.setId(idEst);
+				idCid = rs.getInt("cid_id");
+			System.out.println("ID da cidade = " +idCid);
+			cid.setId(idCid);
 			
 			connection.commit();					
 		} catch (SQLException e) {
@@ -93,8 +97,71 @@ public class CidadeDAO extends AbstractJdbcDAO {
 
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		if(connection == null){
+			openConnection();
+		}
+		PreparedStatement pst=null;
+		ResultSet rs =null;
+		List<EntidadeDominio> listCidade = new ArrayList();
+		
+		String sql = null;
+		
+		System.out.println("________Cidades DAO --> entidade.getID() = " + entidade.getId());
+		if(entidade.getId() != 0) {
+			if(entidade.getId() == -1) {
+				sql = "SELECT * FROM cidades;";
+			}else{
+				sql = "SELECT * FROM cidades WHERE cid_id = ";
+				sql += entidade.getId() + ";";
+				}
+		}
+		
+		System.out.println("________SQL => " + sql);
+		
+        try{
+        	
+        	System.out.println("________Dentro do try do CidadeDAO " + sql);
+        	pst = connection.prepareStatement(sql);
+        	EstadoDAO estDAO = new EstadoDAO();
+        	rs = pst.executeQuery();
+//        	rs = pst.getResultSet();
+        	System.out.println("________ Query executada");
+            while(rs.next()){
+            	Cidade cidade = new Cidade();
+            	Estado est = new Estado();
+            	est.setId(rs.getInt("cid_est_id"));
+            	estDAO.connection = connection;
+            	estDAO.ctrlTransaction = false;
+            	estDAO.consultar(est);	
+            	
+            	cidade.setId(rs.getInt("cid_id"));
+            	cidade.setNome(rs.getString("cid_nome"));
+            	
+                
+            	listCidade.add(cidade);            
+            }
+            connection.commit();
+            System.out.println("________ Query executada entidade => " + listCidade.get(0).getId());
+            return listCidade;
+	
+        
+        }catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();			
+		}finally{
+			try {
+				//pst.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listCidade;
+      }
+
 
 }

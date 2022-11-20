@@ -93,8 +93,10 @@ public class Controle extends HttpServlet {
 			Resultado resultado = null;
 			request.getSession().setAttribute("resultado", resultado);
 			request.getRequestDispatcher("cadastrarVendedor.jsp").forward(request, response);
-			} else doProcessRequest(request, response);
-		
+			} else { 
+				
+				doProcessRequest(request, response);
+			}
 		
 	}
 

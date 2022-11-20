@@ -59,8 +59,9 @@ public class VendedorVH implements IViewHelper {
 		v.getEndereco().setCep(cep);
 		v.getEndereco().setComplemento(complemento);
 		v.getEndereco().setNumero(numero);
+		v.getEndereco().setLogradouro(logradouro);
 				
-		System.out.println("VENDEDOR = " + v.getId());
+		
 		System.out.println("________VendedoreVH --> entidade = " + v);
 		return v;
 	}
@@ -81,13 +82,17 @@ public class VendedorVH implements IViewHelper {
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
 			}else if(operacao.equals("Salvar")){
-				resultado.setMsg("Produto cadastrado com sucesso!");
+				resultado.setMsg("Vendedor cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
 			}else if(operacao.equals("Consultar")) {
 				resultado.setMsg("Lista de Vendedores!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("cadastrarVendedor.jsp"); 
+			}else if (operacao.equals("Editar")) {
+				resultado.setMsg("Vendedor editado com sucesso!");
+				request.getSession().setAttribute("resultado", resultado);
+				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
 			}
 			
 					 			
