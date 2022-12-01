@@ -39,7 +39,7 @@ public class VendedorVH implements IViewHelper {
 		Vendedor v = new Vendedor();
 		System.out.println("Dentro da VH VEndedore operacao = " + operacao);
 		if(operacao != null) {
-			if(operacao.equals("Editar") || operacao.equals("Consultar")) {
+			if(operacao.equals("Editar") || operacao.equals("Consultar") || operacao.equals("Excluir") ) {
 				System.out.println("Dentro do is VH VEndedore id = " + id);
 				
 				v.setId(Integer.parseInt(id));
@@ -81,21 +81,24 @@ public class VendedorVH implements IViewHelper {
 				resultado.setMsg("Lista de Vendedores!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
-			}else if(operacao.equals("Salvar")){
+			}else if(operacao.equals("Cadastrar")){
 				resultado.setMsg("Vendedor cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
 			}else if(operacao.equals("Consultar")) {
 				resultado.setMsg("Lista de Vendedores!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("cadastrarVendedor.jsp"); 
+				d= request.getRequestDispatcher("EditarVendedor.jsp"); 
 			}else if (operacao.equals("Editar")) {
 				resultado.setMsg("Vendedor editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
+			}else if (operacao.equals("Excluir")) {
+				resultado.setMsg("Vendedor excluido com sucesso!");
+				request.getSession().setAttribute("resultado", resultado);
+				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}
 			
-					 			
 		}
 		
 		try {
@@ -111,6 +114,10 @@ public class VendedorVH implements IViewHelper {
 	public void setView(Resultado resultado, ServletConfig config) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public EntidadeDominio consultar() {
+		return null;
 	}
 
 }

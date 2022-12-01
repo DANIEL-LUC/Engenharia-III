@@ -11,6 +11,7 @@ import java.util.Map;
 
 import gestao.controle.web.command.ConsultarCommand;
 import gestao.controle.web.command.EditarCommand;
+import gestao.controle.web.command.ExcluirCommand;
 import gestao.controle.web.command.ICommand;
 import gestao.controle.web.command.SalvarCommand;
 import gestao.controle.web.viewHelper.AutomovelVH;
@@ -41,9 +42,10 @@ public class Controle extends HttpServlet {
 		
 		
 		commands = new HashMap<String, ICommand>();
-		commands.put("Salvar", new SalvarCommand());
+		commands.put("Cadastrar", new SalvarCommand());
 		commands.put("Consultar", new ConsultarCommand());
 		commands.put("Editar", new EditarCommand());
+		commands.put("Excluir", new ExcluirCommand());
      
     }
     
@@ -88,15 +90,8 @@ public class Controle extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		uri = request.getRequestURI();
-		if(uri.equals("/GestaoCar/CadastrarVendedor")) { 
-			Resultado resultado = null;
-			request.getSession().setAttribute("resultado", resultado);
-			request.getRequestDispatcher("cadastrarVendedor.jsp").forward(request, response);
-			} else { 
-				
-				doProcessRequest(request, response);
-			}
+		doProcessRequest(request, response);
+			
 		
 	}
 

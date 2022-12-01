@@ -9,16 +9,16 @@
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<title>:::: CONSULTAR PRODUTO::::</title>
+<title>:::: CONSULTAR VENDEDOR::::</title>
 </head>
 <body>
-	<a href="Home.jsp">Home</a>
+	<a href="index.jsp">Home</a>
 	<%
 		Resultado resultado = (Resultado) session.getAttribute("resultado");
 	%>
 
 
-	<a href="CadastrarVendedor">Novo</a>
+	<a href="cadastrarVendedor.jsp">Novo</a>
 
 	<%
 		if (resultado != null && resultado.getMsg() != null) {
@@ -47,6 +47,7 @@
 				List<EntidadeDominio> entidades = resultado.getEntidades();
 				StringBuilder sbRegistro = new StringBuilder();
 				StringBuilder sbLink = new StringBuilder();
+				StringBuilder sbLinkExcluir = new StringBuilder();
 
 				if (entidades != null) {
 					for (int i = 0; i < entidades.size(); i++) {
@@ -58,13 +59,20 @@
 
 						sbRegistro.append("<TR ALIGN='CENTER'>");
 
+						sbLinkExcluir.append("<a href=Vendedor?");
+						sbLinkExcluir.append("txtId=");
+						sbLinkExcluir.append(p.getId());
+						sbLinkExcluir.append("&");
+						sbLinkExcluir.append("operacao=");
+						sbLinkExcluir.append("Excluir");
+						sbLinkExcluir.append(">");
+						
 						sbLink.append("<a href=Vendedor?");
 						sbLink.append("txtId=");
 						sbLink.append(p.getId());
 						sbLink.append("&");
 						sbLink.append("operacao=");
 						sbLink.append("Consultar");
-
 						sbLink.append(">");
 
 						sbRegistro.append("<TD>");
@@ -95,6 +103,11 @@
 						sbRegistro.append(sbLink.toString());
 						sbRegistro.append(p.getTelefone());
 						sbRegistro.append("</a>");
+						sbRegistro.append("</TD>");
+						
+						sbRegistro.append("<TD>");
+						sbRegistro.append(sbLinkExcluir.toString());
+						sbRegistro.append("Excluir</a>");
 						sbRegistro.append("</TD>");
 
 						sbRegistro.append("</TR>");

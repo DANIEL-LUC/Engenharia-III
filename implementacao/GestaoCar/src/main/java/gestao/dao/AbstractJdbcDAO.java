@@ -41,8 +41,11 @@ public abstract class AbstractJdbcDAO implements IDAO{
 			pst = connection.prepareStatement(sb.toString());
 			pst.setInt(1, entidade.getId());
 
+			
 			pst.executeUpdate();
+			
 			connection.commit();
+			System.out.println("excluido ===========" + entidade.getId());
 		} catch (SQLException e) {
 			try {
 				connection.rollback();
@@ -66,7 +69,7 @@ public abstract class AbstractJdbcDAO implements IDAO{
 		try {
 			
 			if(connection == null || connection.isClosed()) {
-				System.out.println("Dentro do AbstractDAO connection3333423435555");
+				System.out.println("Dentro do AbstractDAO connection");
 				connection = Conexao.getConnection();
 				if(connection == null || connection.isClosed()) {
 					System.out.println("Dentro do AbstractDAO connection é FALSE");

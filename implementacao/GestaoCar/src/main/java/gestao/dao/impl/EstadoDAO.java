@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import gestao.dao.AbstractJdbcDAO;
@@ -96,8 +97,66 @@ public class EstadoDAO extends AbstractJdbcDAO {
 
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		if(connection == null){
+			openConnection();
+		}
+		PreparedStatement pst=null;
+		ResultSet rs =null;
+		List<EntidadeDominio> listEstado = new ArrayList();
+		
+		String sql = null;
+		
+		System.out.println("________Estados DAO --> entidade.getID() = " + entidade.getId());
+		if(entidade.getId() != 0) {
+			if(entidade.getId() == -1) {
+				sql = "SELECT * FROM estados;";
+			}else{
+				sql = "SELECT * FROM estados WHERE est_id = ";
+				sql += entidade.getId() + ";";
+				}
+		}
+		
+		System.out.println("________SQL => " + sql);
+		
+        try{
+        	
+        	System.out.println("________Dentro do try do EstadoDAO " + sql);
+        	pst = connection.prepareStatement(sql);
+        	EstadoDAO estDAO = new EstadoDAO();
+        	rs = pst.executeQuery();
+//        	rs = pst.getResultSet();
+        	System.out.println("________ Query executada");
+            while(rs.next()){
+            	
+            	Estado estado = new Estado();
+            	
+            	
+            	estado.setId(rs.getInt("est_id"));
+            	estado.setNome(rs.getString("est_nome"));
+                
+            	listEstado.add(estado);            
+            }
+            connection.commit();
+            System.out.println("________ Query executada entidade => " + listEstado.get(0).getId());
+            return listEstado;
+	
+        
+        }catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();			
+		}finally{
+			try {
+				//pst.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listEstado;
+      }
 
 }

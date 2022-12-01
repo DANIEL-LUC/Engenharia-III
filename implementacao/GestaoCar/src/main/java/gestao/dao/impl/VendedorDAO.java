@@ -23,7 +23,7 @@ public class VendedorDAO extends AbstractJdbcDAO {
 	}
 
 	public VendedorDAO() {
-		super("VENDEDORES", "VEN_ID");
+		super("vendedores", "ven_id");
 	}
 
 	@Override

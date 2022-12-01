@@ -115,8 +115,34 @@ public class Fachada implements IFachada {
 	}
 
 	public Resultado excluir(EntidadeDominio entidade) {
+		System.out.println("FACHADA EXCLUIR");
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();	
 		
-		return null;
+		String msg = executarRegras(entidade, "Excluir");
+		
+		
+		if(msg == null){
+			IDAO dao = daos.get(nmClasse);
+			try {
+				dao.excluir(entidade);
+				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+				entidades.add(entidade);
+				resultado.setEntidades(entidades);
+			} catch (Exception e) {
+				e.printStackTrace();
+				resultado.setMsg("Não foi possível realizar o registro!");
+				System.out.println("CATCH FACHADA EXCLUIR");
+				
+			}
+		}else{
+			resultado.setMsg(msg);
+					
+			
+		}
+		
+		return resultado;
+
 	}
 
 	public Resultado consultar(EntidadeDominio entidade) {

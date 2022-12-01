@@ -103,6 +103,8 @@ public class CidadeDAO extends AbstractJdbcDAO {
 		PreparedStatement pst=null;
 		ResultSet rs =null;
 		List<EntidadeDominio> listCidade = new ArrayList();
+		Estado estResult = new Estado();
+		
 		
 		String sql = null;
 		
@@ -132,11 +134,11 @@ public class CidadeDAO extends AbstractJdbcDAO {
             	est.setId(rs.getInt("cid_est_id"));
             	estDAO.connection = connection;
             	estDAO.ctrlTransaction = false;
-            	estDAO.consultar(est);	
+            	estResult = (Estado) estDAO.consultar(est).get(0);	
             	
             	cidade.setId(rs.getInt("cid_id"));
             	cidade.setNome(rs.getString("cid_nome"));
-            	
+            	cidade.setEstado(estResult);
                 
             	listCidade.add(cidade);            
             }
