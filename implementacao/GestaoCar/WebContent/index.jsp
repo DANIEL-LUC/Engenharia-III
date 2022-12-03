@@ -24,7 +24,7 @@
                       <a class="buton" id="operacao" name="operacao"  href="cadastrarVendedor.jsp" >Cadastrar</a>
                       </form>
                       <form name = "formAluno" action = "csAluno" method="get">   
-                        <a class="buton"  href="Vendedor" >Consultar</a>
+                        <a class="buton" href="Vendedor" >Consultar</a>
                       </form>
                     </div>
                   </div>
@@ -36,7 +36,7 @@
                         <a class="buton" id="operacao" name="operacao" href="cadastrarModeloAutomovel.jsp">Cadastrar</a>
                       </form>
                       <form name = "formProfessor" action = "csProfessor" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CONSULTAR" >
+                        <a class="buton" href="ModeloAutomovel">Consultar</a>
                       </form>
                     </div>
                   </div>

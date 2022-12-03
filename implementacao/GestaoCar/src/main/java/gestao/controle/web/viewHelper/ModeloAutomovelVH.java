@@ -26,7 +26,22 @@ public class ModeloAutomovelVH implements IViewHelper {
 		System.out.println("DENTRO DA VIEW HELPER ModeloAutomovel");
 		String operacao = request.getParameter("operacao");
 		
-		//String id = request.getParameter("txtId");
+		ModeloAutomovel m = new ModeloAutomovel();
+		
+		String id = request.getParameter("txtId");
+		
+		if(operacao != null) {
+			if(operacao.equals("Editar") || operacao.equals("Consultar") || operacao.equals("Excluir") ) {
+				System.out.println("Dentro do is VH Modelo id = " + id);
+				
+				m.setId(Integer.parseInt(id));
+				return m;
+			}
+		}else {
+			m.setId(-1);
+			return m;
+		}
+		
 		String nomeModelo = request.getParameter("txtNomeModelo");
 		String Ano = request.getParameter("txtAnoLancamento");
 		String preco = request.getParameter("txtPreco");
@@ -40,24 +55,16 @@ public class ModeloAutomovelVH implements IViewHelper {
 		String tipoAutomovel = request.getParameter("txtTipoAutomovel");
 		
 		
-		ModeloAutomovel m = new ModeloAutomovel();
+		
 		System.out.println("Dentro da VH MODELO NOME = " + nomeModelo);
-//		if(operacao != null) {
-//			if(operacao.equals("Editar") || operacao.equals("Consultar") || operacao.equals("Excluir") ) {
-//				System.out.println("Dentro do is VH VEndedore id = " + id);
-//				
-//				v.setId(Integer.parseInt(id));
-//			}
-//		}else {
-//			v.setId(-1);
-//			return v;
-//		}
-//		
+	
+		
+		
 		m.setAcento(Integer.parseInt(acentos));
-		m.setAno_lancamento(Ano);
+		m.setAnoLancamento(Ano);
 		m.setNome(nomeModelo);
 		m.setPortas(Integer.parseInt(portas));
-		m.setMedia_preco(Float.parseFloat(preco));
+		m.setMediaPreco(Float.parseFloat(preco));
 		
 		Marca mar = new Marca(marca);
 		
@@ -74,7 +81,7 @@ public class ModeloAutomovelVH implements IViewHelper {
 		m.setTipoAutomovel(tipo);
 		
 
-		System.out.println("________ModeloAutomovelVH --> entidade = " + m.getAno_lancamento());
+		System.out.println("________ModeloAutomovelVH --> entidade = " + m.getAnoLancamento());
 		return m;
 	}
 
@@ -90,17 +97,17 @@ public class ModeloAutomovelVH implements IViewHelper {
 		if(resultado.getMsg() == null){
 			
 			if(operacao == null) {
-				resultado.setMsg("Lista de Vendedores!");
+				resultado.setMsg("Lista de Modelos de Automoveis!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
+				d= request.getRequestDispatcher("FormConsultarModelo.jsp"); 
 			}else if(operacao.equals("Cadastrar")){
 				resultado.setMsg("Modelo cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarModelo.jsp"); 
 			}else if(operacao.equals("Consultar")) {
-				resultado.setMsg("Lista de Vendedores!");
+				resultado.setMsg("Lista de modelos de automoveis!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("EditarVendedor.jsp"); 
+				d= request.getRequestDispatcher("EditarModelo.jsp"); 
 			}else if (operacao.equals("Editar")) {
 				resultado.setMsg("Vendedor editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);

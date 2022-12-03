@@ -8,11 +8,11 @@ public class ModeloAutomovel extends EntidadeDominio{
 
 	private String ano_lancamento;
 
-	private int acento;
+	private Integer acento;
 
-	private int portas;
+	private Integer portas;
 
-	private float media_preco;
+	private float mediaPreco;
 
 	private Collection<Automovel> automovel;
 
@@ -39,11 +39,11 @@ public class ModeloAutomovel extends EntidadeDominio{
 		this.nome = nome;
 	}
 
-	public String getAno_lancamento() {
+	public String getAnoLancamento() {
 		return ano_lancamento;
 	}
 
-	public void setAno_lancamento(String ano_lancamento) {
+	public void setAnoLancamento(String ano_lancamento) {
 		this.ano_lancamento = ano_lancamento;
 	}
 
@@ -63,12 +63,12 @@ public class ModeloAutomovel extends EntidadeDominio{
 		this.portas = portas;
 	}
 
-	public float getMedia_preco() {
-		return media_preco;
+	public float getMediaPreco() {
+		return mediaPreco;
 	}
 
-	public void setMedia_preco(float media_preco) {
-		this.media_preco = media_preco;
+	public void setMediaPreco(float media_preco) {
+		this.mediaPreco = media_preco;
 	}
 
 	public Collection<Automovel> getAutomovel() {
