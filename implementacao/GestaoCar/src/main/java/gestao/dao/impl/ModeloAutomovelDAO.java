@@ -13,6 +13,7 @@ import gestao.dominio.Endereco;
 import gestao.dominio.EntidadeDominio;
 import gestao.dominio.EspecificacaoTecnica;
 import gestao.dominio.ModeloAutomovel;
+import gestao.dominio.TipoAutomovel;
 import gestao.dominio.Vendedor;
 import gestao.dominio.Marca;
 
@@ -41,7 +42,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 				
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO modeloautomoveis(mod_nome, mod_ano, mod_acentos, mod_portas, mod_preco,");
-			sql.append("mod_marca, mod_potencia, mod_cambio, mod_combustivel, mod_km_litro ) VALUES (?,?,?,?,?,?,?,?,?,?)");		
+			sql.append("mod_marca, mod_potencia, mod_cambio, mod_combustivel, mod_km_litro, mod_tipo ) VALUES (?,?,?,?,?,?,?,?,?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString(), 
 					Statement.RETURN_GENERATED_KEYS);
@@ -56,6 +57,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 			pst.setString(8, modeloAutomovel.getEspecificacaoTecnica().getCambio());
 			pst.setString(9, modeloAutomovel.getEspecificacaoTecnica().getCombustivel());
 			pst.setFloat(10, modeloAutomovel.getEspecificacaoTecnica().getKmLitro());
+			pst.setString(11, modeloAutomovel.getTipoAutomovel().getTipo());
 			
 			//Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
 			//pst.setTimestamp(4, time);
@@ -88,7 +90,59 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 	}
 
 	public void alterar(EntidadeDominio entidade) {
-
+		System.out.println("Dentro do DAO ALTERAR MODELO");
+		openConnection();
+		PreparedStatement pst=null;
+		ResultSet rs =null;
+		ModeloAutomovel modeloAutomovel = (ModeloAutomovel)entidade;
+		
+		
+		try {
+			connection.setAutoCommit(false);
+			System.out.println("Deu CERTOOOOOO");
+						
+			
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE modeloautomoveis SET mod_nome=?, mod_ano=?, mod_acentos=?, ");
+			sql.append("mod_portas=?, mod_preco=?, mod_marca=?, mod_potencia=?, mod_cambio=?, "
+					+ "mod_combustivel=?, mod_km_litro=? , mod_tipo=? WHERE mod_id=?");		
+					
+			pst = connection.prepareStatement(sql.toString());
+			
+			pst.setString(1, modeloAutomovel.getNome());
+			pst.setString(2, modeloAutomovel.getAnoLancamento());
+			pst.setInt(3, modeloAutomovel.getAcento());
+			pst.setInt(4,modeloAutomovel.getPortas());
+			pst.setFloat(5, modeloAutomovel.getMediaPreco());
+			pst.setString(6, modeloAutomovel.getMarca().getNome());
+			pst.setFloat(7, modeloAutomovel.getEspecificacaoTecnica().getPotenciaCv());
+			pst.setString(8, modeloAutomovel.getEspecificacaoTecnica().getCambio());
+			pst.setString(9, modeloAutomovel.getEspecificacaoTecnica().getCombustivel());
+			pst.setFloat(10, modeloAutomovel.getEspecificacaoTecnica().getKmLitro());
+			pst.setString(11, modeloAutomovel.getTipoAutomovel().getTipo());
+			pst.setInt(12, modeloAutomovel.getId());
+			
+			//Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
+			//pst.setTimestamp(4, time);
+			pst.executeUpdate();
+						
+			connection.commit();		
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();			
+		}finally{
+			try {
+				//pst.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
 	}
 
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) throws SQLException {
@@ -123,9 +177,9 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
             	ModeloAutomovel modelo = new ModeloAutomovel();
             	Marca marca = new Marca(rs.getString("mod_marca"));
             	EspecificacaoTecnica tecnica = new EspecificacaoTecnica();
-            	
+            	TipoAutomovel tipo = new TipoAutomovel(rs.getString("mod_tipo"));
             
-	            	
+            	
             	modelo.setId(rs.getInt("mod_id"));
             	modelo.setNome(rs.getString("mod_nome"));
             	modelo.setAnoLancamento(rs.getString("mod_ano"));
@@ -136,8 +190,10 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
             	tecnica.setCambio(rs.getString("mod_cambio"));
             	tecnica.setCombustivel(rs.getString("mod_combustivel"));
             	tecnica.setKmLitro(rs.getFloat("mod_km_litro"));
-            	tecnica.setPotenciaCv(rs.getFloat("moD_potencia"));
+            	tecnica.setPotenciaCv(rs.getFloat("mod_potencia"));
             	
+            	
+            	modelo.setTipoAutomovel(tipo);
             	modelo.setEspecificacaoTecnica(tecnica);
             	modelo.setMarca(marca);
             	

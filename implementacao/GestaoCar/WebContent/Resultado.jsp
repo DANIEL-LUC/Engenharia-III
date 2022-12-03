@@ -8,8 +8,8 @@
 <title>Resposta</title>
 <meta charset="utf-8">
 <%
-Resultado resultado = (Resultado)request.getAttribute("resultado");
-String mensagem = "<h1>" +resultado.getMsg().toString()+"</h1>";
+Resultado resultado = (Resultado)session.getAttribute("resultado");
+String mensagem = "<h1>" +resultado.getMsg()+"</h1>";
 
 %>
 <link rel="shortcut icon" href="img/alunos-121x121.png">
@@ -21,39 +21,39 @@ String mensagem = "<h1>" +resultado.getMsg().toString()+"</h1>";
             <div class = "logo">
                 <h2 >
                     <a class="log" href="index.html">
-                    <img src="img/alunos-121x121.png" alt="ALuno" style="height: 3.8rem;">
-                    Cadastro do Aluno
+                    
+                    Cadastro de automóveis
                     </a>
                 </h2>
                 <%out.print(mensagem);%>
             </div><!--logo-->
-            <div class="menu">
+             <div class="menu">
                 <div class="dropdown">
-                    <button class="dropbtn">Aluno</button>
+                    <button class="dropbtn">Vendedor</button>
                     <div class="dropdown-content">
-                      <form name = "formAluno" action = "ccAluno" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CADASTRAR" >
+                      <form name = "formVendedor" action ="Vendedor" method="get">   
+                      <a class="buton" id="operacao" name="operacao"  href="cadastrarVendedor.jsp" >Cadastrar</a>
                       </form>
                       <form name = "formAluno" action = "csAluno" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CONSULTAR" >
+                        <a class="buton" href="Vendedor" >Consultar</a>
                       </form>
                     </div>
                   </div>
 
                   <div class="dropdown">
-                    <button class="dropbtn">Professor</button>
+                    <button class="dropbtn">Modelo Automovel</button>
                     <div class="dropdown-content">
                       <form name = "formProfessor" action = "ccProfessor" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CADASTRAR" >
+                        <a class="buton" id="operacao" name="operacao" href="cadastrarModeloAutomovel.jsp">Cadastrar</a>
                       </form>
                       <form name = "formProfessor" action = "csProfessor" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CONSULTAR" >
+                        <a class="buton" href="ModeloAutomovel">Consultar</a>
                       </form>
                     </div>
                   </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Curso</button>
+                    <button class="dropbtn">Automovel</button>
                     <div class="dropdown-content">
                       <a class="buton" href="cadastrar-curso.html">CADASTRAR</a>
                       <form name = "formCurso" action = "csCurso" method="get">   

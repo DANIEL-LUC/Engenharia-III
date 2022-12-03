@@ -31,11 +31,13 @@ public class ModeloAutomovelVH implements IViewHelper {
 		String id = request.getParameter("txtId");
 		
 		if(operacao != null) {
-			if(operacao.equals("Editar") || operacao.equals("Consultar") || operacao.equals("Excluir") ) {
+			if( operacao.equals("Consultar") || operacao.equals("Excluir") ) {
 				System.out.println("Dentro do is VH Modelo id = " + id);
 				
 				m.setId(Integer.parseInt(id));
 				return m;
+			}else if(operacao.equals("Editar")) {
+				m.setId(Integer.parseInt(id));
 			}
 		}else {
 			m.setId(-1);
@@ -109,11 +111,11 @@ public class ModeloAutomovelVH implements IViewHelper {
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("EditarModelo.jsp"); 
 			}else if (operacao.equals("Editar")) {
-				resultado.setMsg("Vendedor editado com sucesso!");
+				resultado.setMsg("Modelo editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
+				d= request.getRequestDispatcher("FormConsultarModelo.jsp"); 
 			}else if (operacao.equals("Excluir")) {
-				resultado.setMsg("Vendedor excluido com sucesso!");
+				resultado.setMsg("Modelo excluido com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}
