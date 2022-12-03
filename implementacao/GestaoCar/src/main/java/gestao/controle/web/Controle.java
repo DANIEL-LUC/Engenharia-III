@@ -16,6 +16,7 @@ import gestao.controle.web.command.ICommand;
 import gestao.controle.web.command.SalvarCommand;
 import gestao.controle.web.viewHelper.AutomovelVH;
 import gestao.controle.web.viewHelper.IViewHelper;
+import gestao.controle.web.viewHelper.ModeloAutomovelVH;
 import gestao.controle.web.viewHelper.VendedorVH;
 import gestao.dominio.EntidadeDominio;
 
@@ -38,6 +39,7 @@ public class Controle extends HttpServlet {
     	vhs = new HashMap<String, IViewHelper>();
 		vhs.put("/GestaoCar/Automovel", new AutomovelVH());
 		vhs.put("/GestaoCar/Vendedor", new VendedorVH());
+		vhs.put("/GestaoCar/ModeloAutomovel", new ModeloAutomovelVH());
 		
 		
 		
@@ -58,6 +60,7 @@ public class Controle extends HttpServlet {
 		operacao = request.getParameter("operacao");
 		
 		System.out.println("---------------> operacao = " + operacao);
+		System.out.println("---------------> uri = " + uri);
 
 		Resultado resultado = doProcess();
 

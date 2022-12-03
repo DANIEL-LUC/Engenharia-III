@@ -9,8 +9,10 @@ import java.util.Map;
 import gestao.controle.web.command.AbstractCommand;
 import gestao.controller.IFachada;
 import gestao.dao.IDAO;
+import gestao.dao.impl.ModeloAutomovelDAO;
 import gestao.dao.impl.VendedorDAO;
 import gestao.dominio.EntidadeDominio;
+import gestao.dominio.ModeloAutomovel;
 import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
 import gestao.util.Resultado;
@@ -27,6 +29,8 @@ public class Fachada implements IFachada {
 	private Resultado resultado;
 	
 	VendedorDAO vendedorDAO = new VendedorDAO();
+	
+	ModeloAutomovelDAO modeloDAO = new ModeloAutomovelDAO();
 
 	
 	
@@ -38,13 +42,11 @@ public class Fachada implements IFachada {
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		
 		
-		VendedorDAO vendedorDAO = new VendedorDAO();
 		
+		daos.put(ModeloAutomovel.class.getName(), modeloDAO);
 		daos.put(Vendedor.class.getName(), vendedorDAO);
 		
 	}
-	
-	
 	
 	
 	public Resultado salvar(EntidadeDominio entidade) {

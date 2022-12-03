@@ -33,7 +33,7 @@
                     <button class="dropbtn">Modelo Automovel</button>
                     <div class="dropdown-content">
                       <form name = "formProfessor" action = "ccProfessor" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CADASTRAR" >
+                        <a class="buton" id="operacao" name="operacao" href="cadastrarModeloAutomovel.jsp">Cadastrar</a>
                       </form>
                       <form name = "formProfessor" action = "csProfessor" method="get">   
                         <input class="buton" id="operacao" name="operacao" type = "submit" value = "CONSULTAR" >

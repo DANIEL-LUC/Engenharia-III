@@ -13,6 +13,10 @@ public class Marca {
 	public Marca() {	
 	}
 
+	public Marca(String marca) {
+		this.nome = marca;
+	}
+
 	public String getNome() {
 		return nome;
 	}

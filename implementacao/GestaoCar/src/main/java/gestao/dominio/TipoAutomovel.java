@@ -1,28 +1,34 @@
 package gestao.dominio;
 
 
-public class TipoAutomovel extends EntidadeDominio {
-	enum ClassesSocial {LUXO, POPULAR};
-	private ClassesSocial social;
+public class TipoAutomovel extends EntidadeDominio{
 
-	private String tipoVeiculo;
+	private String tipo;
+
+	private ModeloAutomovel modeloAutomovel;
 	
 	
-	public ClassesSocial getSocial() {
-		return social;
+
+	public TipoAutomovel(String tipoAutomovel) {
+		this.tipo = tipoAutomovel;
 	}
 
-	public void setSocial(ClassesSocial social) {
-		this.social = social;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public String getTipoVeiculo() {
-		return tipoVeiculo;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
-	public void setTipoVeiculo(String tipoVeiculo) {
-		this.tipoVeiculo = tipoVeiculo;
+	public ModeloAutomovel getModeloAutomovel() {
+		return modeloAutomovel;
+	}
+
+	public void setModeloAutomovel(ModeloAutomovel modeloAutomovel) {
+		this.modeloAutomovel = modeloAutomovel;
 	}
 
 	
+
 }
