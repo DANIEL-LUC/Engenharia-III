@@ -85,7 +85,7 @@ public class Controle extends HttpServlet {
 			System.out.println("Command  = ="+command.getClass().getName());
 
 			Resultado resultado = command.executar(entidade);
-
+			System.out.println("Mensagem ---> "+ resultado.getMsg());
 			return resultado;
 		}
 		

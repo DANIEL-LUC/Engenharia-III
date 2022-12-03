@@ -61,21 +61,36 @@ public class ModeloAutomovelVH implements IViewHelper {
 		System.out.println("Dentro da VH MODELO NOME = " + nomeModelo);
 	
 		
+		if(acentos != null && !acentos.trim().equals("")){
+			m.setAcento(Integer.parseInt(acentos));
+		}
 		
-		m.setAcento(Integer.parseInt(acentos));
+		if(portas != null && !portas.trim().equals("")){
+			m.setPortas(Integer.parseInt(portas));
+		}
+		
+		if(preco != null && !preco.trim().equals("")){
+			m.setMediaPreco(Float.parseFloat(preco));
+		}
+
+
 		m.setAnoLancamento(Ano);
 		m.setNome(nomeModelo);
-		m.setPortas(Integer.parseInt(portas));
-		m.setMediaPreco(Float.parseFloat(preco));
 		
+
 		Marca mar = new Marca(marca);
 		
 		EspecificacaoTecnica tecnico = new EspecificacaoTecnica();
 		tecnico.setCambio(cambio);
 		tecnico.setCombustivel(combustivel);
-		tecnico.setKmLitro(Float.parseFloat(kmLitro));
-		tecnico.setPotenciaCv(Float.parseFloat(potencia));
 		
+		if(kmLitro != null && !kmLitro.trim().equals("")){
+			tecnico.setKmLitro(Float.parseFloat(kmLitro));
+		}
+		if(potencia != null && !potencia.trim().equals("")){
+			tecnico.setPotenciaCv(Float.parseFloat(potencia));
+		}
+
 		TipoAutomovel tipo = new TipoAutomovel(tipoAutomovel);
 		
 		m.setMarca(mar);
@@ -120,6 +135,9 @@ public class ModeloAutomovelVH implements IViewHelper {
 				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}
 			
+		}else {
+			request.getSession().setAttribute("resultado", resultado);
+			d= request.getRequestDispatcher("Resultado.jsp"); 
 		}
 		
 		try {

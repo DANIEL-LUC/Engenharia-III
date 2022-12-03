@@ -7,7 +7,10 @@ public abstract class AbstractValidateIsNull implements IStrategy {
 
 	protected StringBuilder mensagemErro;
 
-	protected boolean isNull() {
+	protected boolean isNull(Object obj) {
+		if(obj == null) {
+			return true;
+		}
 		return false;
 	}
 
@@ -24,7 +27,8 @@ public abstract class AbstractValidateIsNull implements IStrategy {
 	}
 
 
-	public void processar(EntidadeDominio entidade) {
+	public String processar(EntidadeDominio entidade) {
+		return null;
 
 	}
 

@@ -7,7 +7,8 @@ public class ComplementarDtCadastro implements IStrategy {
 
 
 	@Override
-	public void processar(EntidadeDominio entidade) {
+	public String processar(EntidadeDominio entidade) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

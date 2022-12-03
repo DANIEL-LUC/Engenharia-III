@@ -7,9 +7,11 @@ public class ValidadarExistencia implements IStrategy {
 
 
 	/**
+	 * @return 
 	 * @see Classes.Strategys.IStrategy#processar(Classes.Entidade.EntidadeDominio)
 	 */
-	public void processar(EntidadeDominio entidade) {
+	public String processar(EntidadeDominio entidade) {
+		return null;
 
 	}
 

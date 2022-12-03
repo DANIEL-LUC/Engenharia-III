@@ -15,6 +15,7 @@ import gestao.dominio.EntidadeDominio;
 import gestao.dominio.ModeloAutomovel;
 import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
+import gestao.negocio.impl.ValidarDadosObrgModelo;
 import gestao.util.Resultado;
 
 public class Fachada implements IFachada {
@@ -24,14 +25,9 @@ public class Fachada implements IFachada {
 	
 	private Map<String, IDAO> daos;
 
-	private Map<String, Map<String, List<IStrategy>>> rns;
+	private Map<String, Map<String, List<IStrategy>>> regras;
 	
 	private Resultado resultado;
-	
-	VendedorDAO vendedorDAO = new VendedorDAO();
-	
-	ModeloAutomovelDAO modeloDAO = new ModeloAutomovelDAO();
-
 	
 	
 	
@@ -39,12 +35,44 @@ public class Fachada implements IFachada {
 
 		daos = new HashMap<String, IDAO>();
 
-		rns = new HashMap<String, Map<String, List<IStrategy>>>();
+		regras = new HashMap<String, Map<String, List<IStrategy>>>();
 		
+		VendedorDAO vendedorDAO = new VendedorDAO();
+		ModeloAutomovelDAO modeloDAO = new ModeloAutomovelDAO();
 		
 		
 		daos.put(ModeloAutomovel.class.getName(), modeloDAO);
 		daos.put(Vendedor.class.getName(), vendedorDAO);
+		
+		
+		
+//		ValidadorDadosObrigatoriosFornecedor vrDadosObrigatoriosFornecedor = new ValidadorDadosObrigatoriosFornecedor();
+//		ValidadorCnpj vCnpj = new ValidadorCnpj();
+//		ComplementarDtCadastro cDtCadastro = new ComplementarDtCadastro();
+//		ValidadorCpf vCpf = new ValidadorCpf();
+//		ValidadorQtdProduto vQtd = new ValidadorQtdProduto();
+		
+		ValidarDadosObrgModelo validarModelo = new ValidarDadosObrgModelo();
+//		
+	
+		List<IStrategy> rnsSalvarModeloAutomovel = new ArrayList<IStrategy>();
+		/* Adicionando as regras a serem utilizadas na operação salvar do fornecedor*/
+		rnsSalvarModeloAutomovel.add(validarModelo);
+		
+		
+//		rnsSalvarFornecedor.add(vrDadosObrigatoriosFornecedor);
+//		rnsSalvarFornecedor.add(vCnpj);
+//		rnsSalvarFornecedor.add(cDtCadastro);
+		
+		
+		Map<String, List<IStrategy>> regrasModeloAutomovel = new HashMap<String, List<IStrategy>>();
+
+		regrasModeloAutomovel.put("Salvar", rnsSalvarModeloAutomovel);	
+		
+		
+		regras.put(ModeloAutomovel.class.getName(), regrasModeloAutomovel);
+		
+	
 		
 	}
 	
@@ -53,33 +81,26 @@ public class Fachada implements IFachada {
 		resultado = new Resultado();
 		String nmClasse = entidade.getClass().getName();	
 		
-		String msg = executarRegras(entidade, "SALVAR");
+		String msg = executarRegras(entidade, "Salvar");
 		
-		IDAO dao = daos.get(nmClasse);
-		dao.salvar(entidade);
-		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-		entidades.add(0, entidade);
-		resultado.setEntidades(entidades);
+//		IDAO dao = daos.get(nmClasse);
+//		dao.salvar(entidade);
+//		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+//		entidades.add(0, entidade);
+//		resultado.setEntidades(entidades);
+//		
 		
 		
-		
-//		if(msg == null){
-//			IDAO dao = daos.get(nmClasse);
-//			try {
-//				dao.salvar(entidade);
-//				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-//				entidades.add(0, entidade);
-//				resultado.setEntidades(entidades);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//				resultado.setMsg("Não foi possível realizar o registro!");
-//				
-//			}
-//		}else{
-//			resultado.setMsg(msg);
-//					
-//			
-//		}
+		if(msg == null){
+			IDAO dao = daos.get(nmClasse);
+			dao.salvar(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(0, entidade);
+			resultado.setEntidades(entidades);
+		}else{
+			resultado.setMsg(msg);
+					
+		}
 		
 		return resultado;
 	}
@@ -185,7 +206,7 @@ public class Fachada implements IFachada {
 		String nmClasse = entidade.getClass().getName();		
 		StringBuilder msg = new StringBuilder();
 		
-		Map<String, List<IStrategy>> regrasOperacao = rns.get(nmClasse);
+		Map<String, List<IStrategy>> regrasOperacao = regras.get(nmClasse);
 		
 		
 		if(regrasOperacao != null){
