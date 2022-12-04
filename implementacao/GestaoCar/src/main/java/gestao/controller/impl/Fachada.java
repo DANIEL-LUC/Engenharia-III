@@ -15,6 +15,8 @@ import gestao.dominio.EntidadeDominio;
 import gestao.dominio.ModeloAutomovel;
 import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
+import gestao.negocio.impl.CompletarClassificacaoSocial;
+import gestao.negocio.impl.ValidarCombustivel;
 import gestao.negocio.impl.ValidarDadosObrgModelo;
 import gestao.util.Resultado;
 
@@ -53,11 +55,14 @@ public class Fachada implements IFachada {
 //		ValidadorQtdProduto vQtd = new ValidadorQtdProduto();
 		
 		ValidarDadosObrgModelo validarModelo = new ValidarDadosObrgModelo();
-//		
+		CompletarClassificacaoSocial classificacaoSocial = new CompletarClassificacaoSocial();
+		ValidarCombustivel validarCombustive = new ValidarCombustivel();
 	
 		List<IStrategy> rnsSalvarModeloAutomovel = new ArrayList<IStrategy>();
 		/* Adicionando as regras a serem utilizadas na operação salvar do fornecedor*/
 		rnsSalvarModeloAutomovel.add(validarModelo);
+		rnsSalvarModeloAutomovel.add(classificacaoSocial);
+		rnsSalvarModeloAutomovel.add(validarCombustive);
 		
 		
 //		rnsSalvarFornecedor.add(vrDadosObrigatoriosFornecedor);
@@ -82,14 +87,7 @@ public class Fachada implements IFachada {
 		String nmClasse = entidade.getClass().getName();	
 		
 		String msg = executarRegras(entidade, "Salvar");
-		
-//		IDAO dao = daos.get(nmClasse);
-//		dao.salvar(entidade);
-//		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-//		entidades.add(0, entidade);
-//		resultado.setEntidades(entidades);
-//		
-		
+
 		
 		if(msg == null){
 			IDAO dao = daos.get(nmClasse);

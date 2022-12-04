@@ -20,7 +20,7 @@ public class ModeloAutomovel extends EntidadeDominio{
 
 	private TipoAutomovel tipoAutomovel;
 
-	private ClassifacaoSocial classifacaoSocial;
+	private ClassificacaoSocial classificacaoSocial;
 
 	private EspecificacaoTecnica especificacaoTecnica;
 	
@@ -95,12 +95,12 @@ public class ModeloAutomovel extends EntidadeDominio{
 		this.tipoAutomovel = tipoAutomovel;
 	}
 
-	public ClassifacaoSocial getClassifacaoSocial() {
-		return classifacaoSocial;
+	public ClassificacaoSocial getClassifacaoSocial() {
+		return classificacaoSocial;
 	}
 
-	public void setClassifacaoSocial(ClassifacaoSocial classifacaoSocial) {
-		this.classifacaoSocial = classifacaoSocial;
+	public void setClassifacaoSocial(ClassificacaoSocial classifacaoSocial) {
+		this.classificacaoSocial = classifacaoSocial;
 	}
 
 	public EspecificacaoTecnica getEspecificacaoTecnica() {

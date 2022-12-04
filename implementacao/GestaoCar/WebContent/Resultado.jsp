@@ -11,6 +11,9 @@
 Resultado resultado = (Resultado)session.getAttribute("resultado");
 String mensagem = "<h1>" +resultado.getMsg()+"</h1>";
 
+resultado.setMsg(null);
+request.getSession().setAttribute("resultado", resultado);
+
 %>
 <link rel="shortcut icon" href="img/alunos-121x121.png">
 <link rel="stylesheet" href="css/style.css">

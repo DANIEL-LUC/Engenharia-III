@@ -35,14 +35,15 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 		ResultSet rs =null;
 		ModeloAutomovel modeloAutomovel = (ModeloAutomovel)entidade;
 		
-		
+		System.out.println("______________________________>> classificação "+ modeloAutomovel.getClassifacaoSocial().getClassificao());
 		try {
 			connection.setAutoCommit(false);
 			System.out.println("Deu CERTOOOOOO");
 				
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO modeloautomoveis(mod_nome, mod_ano, mod_acentos, mod_portas, mod_preco,");
-			sql.append("mod_marca, mod_potencia, mod_cambio, mod_combustivel, mod_km_litro, mod_tipo ) VALUES (?,?,?,?,?,?,?,?,?,?,?)");		
+			sql.append("mod_marca, mod_potencia, mod_cambio, mod_combustivel, mod_km_litro, mod_tipo, mod_class_social ) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString(), 
 					Statement.RETURN_GENERATED_KEYS);
@@ -58,6 +59,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 			pst.setString(9, modeloAutomovel.getEspecificacaoTecnica().getCombustivel());
 			pst.setFloat(10, modeloAutomovel.getEspecificacaoTecnica().getKmLitro());
 			pst.setString(11, modeloAutomovel.getTipoAutomovel().getTipo());
+			pst.setString(12, modeloAutomovel.getClassifacaoSocial().getClassificao());
 			
 			//Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
 			//pst.setTimestamp(4, time);

@@ -1,17 +1,13 @@
 package gestao.controle.web.viewHelper;
 
 import java.io.IOException;
-import java.util.Date;
 
-import gestao.dominio.Cidade;
-import gestao.dominio.Endereco;
+import gestao.dominio.ClassificacaoSocial;
 import gestao.dominio.EntidadeDominio;
 import gestao.dominio.EspecificacaoTecnica;
-import gestao.dominio.Estado;
 import gestao.dominio.Marca;
 import gestao.dominio.ModeloAutomovel;
 import gestao.dominio.TipoAutomovel;
-import gestao.dominio.Vendedor;
 import gestao.util.Resultado;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -92,7 +88,9 @@ public class ModeloAutomovelVH implements IViewHelper {
 		}
 
 		TipoAutomovel tipo = new TipoAutomovel(tipoAutomovel);
+		ClassificacaoSocial social = new ClassificacaoSocial();
 		
+		m.setClassifacaoSocial(social);
 		m.setMarca(mar);
 		m.setEspecificacaoTecnica(tecnico);
 		m.setTipoAutomovel(tipo);
