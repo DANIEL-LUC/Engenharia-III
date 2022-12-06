@@ -24,6 +24,8 @@ public class ModeloAutomovel extends EntidadeDominio{
 
 	private EspecificacaoTecnica especificacaoTecnica;
 	
+	private boolean economico ;
+	
 	
 	
 
@@ -109,6 +111,14 @@ public class ModeloAutomovel extends EntidadeDominio{
 
 	public void setEspecificacaoTecnica(EspecificacaoTecnica especificacaoTecnica) {
 		this.especificacaoTecnica = especificacaoTecnica;
+	}
+
+	public boolean isEconomico() {
+		return economico;
+	}
+
+	public void setEconomico(boolean economico) {
+		this.economico = economico;
 	}
 	
 	

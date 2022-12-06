@@ -8,10 +8,7 @@ public abstract class AbstractValidateIsNull implements IStrategy {
 	protected StringBuilder mensagemErro;
 
 	protected boolean isNull(Object obj) {
-		if(obj == null) {
-			return true;
-		}
-		return false;
+		return obj == null;
 	}
 
 	protected boolean isString() {

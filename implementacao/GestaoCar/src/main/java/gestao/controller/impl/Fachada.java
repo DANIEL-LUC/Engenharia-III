@@ -17,7 +17,14 @@ import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
 import gestao.negocio.impl.CompletarClassificacaoSocial;
 import gestao.negocio.impl.ValidarCombustivel;
+import gestao.negocio.impl.ValidarCpf;
 import gestao.negocio.impl.ValidarDadosObrgModelo;
+import gestao.negocio.impl.ValidarDadosVendedor;
+import gestao.negocio.impl.ValidarEmail;
+import gestao.negocio.impl.ValidarExistenciaVendedor;
+import gestao.negocio.impl.ValidarMarca;
+import gestao.negocio.impl.ValidarTipoAutomovel;
+import gestao.negocio.impl.VerificarEconomico;
 import gestao.util.Resultado;
 
 public class Fachada implements IFachada {
@@ -57,26 +64,44 @@ public class Fachada implements IFachada {
 		ValidarDadosObrgModelo validarModelo = new ValidarDadosObrgModelo();
 		CompletarClassificacaoSocial classificacaoSocial = new CompletarClassificacaoSocial();
 		ValidarCombustivel validarCombustive = new ValidarCombustivel();
+		ValidarTipoAutomovel validarTipo = new ValidarTipoAutomovel();
+		ValidarMarca validarMarca = new ValidarMarca();
+		VerificarEconomico verificarEconomia = new VerificarEconomico();
 	
 		List<IStrategy> rnsSalvarModeloAutomovel = new ArrayList<IStrategy>();
 		/* Adicionando as regras a serem utilizadas na operação salvar do fornecedor*/
 		rnsSalvarModeloAutomovel.add(validarModelo);
 		rnsSalvarModeloAutomovel.add(classificacaoSocial);
 		rnsSalvarModeloAutomovel.add(validarCombustive);
+		rnsSalvarModeloAutomovel.add(validarTipo);
+		rnsSalvarModeloAutomovel.add(validarMarca);
+		rnsSalvarModeloAutomovel.add(verificarEconomia);		
 		
 		
-//		rnsSalvarFornecedor.add(vrDadosObrigatoriosFornecedor);
-//		rnsSalvarFornecedor.add(vCnpj);
-//		rnsSalvarFornecedor.add(cDtCadastro);
+		ValidarDadosVendedor  validarDados = new ValidarDadosVendedor();
+		ValidarCpf validarCPF = new ValidarCpf();
+		ValidarEmail validarEmail = new ValidarEmail();
+		ValidarExistenciaVendedor existenciaVendedor = new ValidarExistenciaVendedor();
+		
+		
+		// VENDEDOR REGRAS SALVAR
+		List<IStrategy> rnsSalvarVendedor = new ArrayList<IStrategy>();
+		
+		rnsSalvarVendedor.add(validarDados);
+		rnsSalvarVendedor.add(validarCPF);
+		rnsSalvarVendedor.add(validarEmail);
+		rnsSalvarVendedor.add(existenciaVendedor);
 		
 		
 		Map<String, List<IStrategy>> regrasModeloAutomovel = new HashMap<String, List<IStrategy>>();
 
 		regrasModeloAutomovel.put("Salvar", rnsSalvarModeloAutomovel);	
 		
+		Map<String, List<IStrategy>> regrasVendedor = new HashMap<String, List<IStrategy>>();
+		regrasVendedor.put("Salvar", rnsSalvarVendedor);
 		
 		regras.put(ModeloAutomovel.class.getName(), regrasModeloAutomovel);
-		
+		regras.put(Vendedor.class.getName(), regrasVendedor);
 	
 		
 	}

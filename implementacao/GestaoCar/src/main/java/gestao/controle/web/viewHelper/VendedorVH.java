@@ -99,9 +99,13 @@ public class VendedorVH implements IViewHelper {
 				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}
 			
+		}else {
+			request.getSession().setAttribute("resultado", resultado);
+			d= request.getRequestDispatcher("Resultado.jsp");
 		}
 		
 		try {
+			
 			d.forward(request,response);
 		} catch (IOException e) {
 			e.printStackTrace();

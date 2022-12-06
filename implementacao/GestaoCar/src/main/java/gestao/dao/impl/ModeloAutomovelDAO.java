@@ -42,8 +42,8 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 				
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO modeloautomoveis(mod_nome, mod_ano, mod_acentos, mod_portas, mod_preco,");
-			sql.append("mod_marca, mod_potencia, mod_cambio, mod_combustivel, mod_km_litro, mod_tipo, mod_class_social ) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");		
+			sql.append("mod_marca, mod_potencia, mod_cambio, mod_combustivel, mod_km_litro, mod_tipo, mod_class_social, mod_economico ) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString(), 
 					Statement.RETURN_GENERATED_KEYS);
@@ -60,6 +60,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
 			pst.setFloat(10, modeloAutomovel.getEspecificacaoTecnica().getKmLitro());
 			pst.setString(11, modeloAutomovel.getTipoAutomovel().getTipo());
 			pst.setString(12, modeloAutomovel.getClassifacaoSocial().getClassificao());
+			pst.setBoolean(13, modeloAutomovel.isEconomico());
 			
 			//Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
 			//pst.setTimestamp(4, time);

@@ -29,7 +29,7 @@
 
 	<TABLE BORDER="5" WIDTH="50%" CELLPADDING="4" CELLSPACING="3">
 		<TR>
-			<TH COLSPAN="5"><BR>
+			<TH COLSPAN="7"><BR>
 				<H3>MODELOS DE AUTOMOVEIS</H3></TH>
 		</TR>
 
@@ -39,6 +39,8 @@
 			<TH>Marca:</TH>
 			<TH>Combustivel:</TH>
 			<TH>Ano de Lançamento:</TH>
+			<TH>Preço médio:</TH>
+			<TH>Consumo Energético:</TH>
 		</TR>
 
 
@@ -103,6 +105,18 @@
 						sbRegistro.append(sbLink.toString());
 						sbRegistro.append(m.getAnoLancamento());
 						sbRegistro.append("</a>");
+						sbRegistro.append("</TD>");
+						
+						sbRegistro.append("<TD> R$ ");
+						sbRegistro.append(sbLink.toString());
+						sbRegistro.append(m.getMediaPreco());
+						sbRegistro.append("</a>");
+						sbRegistro.append("</TD>");
+						
+						sbRegistro.append("<TD>");
+						sbRegistro.append(sbLink.toString());
+						sbRegistro.append(m.getEspecificacaoTecnica().getKmLitro());
+						sbRegistro.append(" MJ/Km</a>");
 						sbRegistro.append("</TD>");
 						
 						sbRegistro.append("<TD>");

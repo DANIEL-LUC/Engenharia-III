@@ -155,29 +155,56 @@ public class VendedorDAO extends AbstractJdbcDAO {
 		PreparedStatement pst=null;
 		ResultSet rs =null;
 		List<EntidadeDominio> listVendedores = new ArrayList();
+		Vendedor vendedorResult = (Vendedor)entidade;
 		
-		String sql = null;
+		//String sql = null;
 		
-		System.out.println("________Vendedore DAO --> entidade.getID() = " + entidade.getId());
-		if(entidade.getId() != 0) {
-			if(entidade.getId() == -1) {
-				sql = "SELECT * FROM vendedores;";
-			}else{
-				sql = "SELECT * FROM vendedores WHERE ven_id = ";
-				sql += entidade.getId() + ";";
-				}
-		}
-		
-		System.out.println("________SQL => " + sql);
+//		System.out.println("________Vendedore DAO --> entidade.getID() = " + entidade.getId());
+//		if(entidade.getId() != 0) {
+//			if(entidade.getId() == -1) {
+//				sql = "SELECT * FROM vendedores;";
+//			}else{
+//				sql = "SELECT * FROM vendedores WHERE ven_id = ";
+//				sql += entidade.getId() + ";";
+//				}
+//		}
+//		
+//		System.out.println("________SQL => " + sql);
 		
         try{
+        	
         	connection.setAutoCommit(false);
+        	
+        	StringBuilder sql = new StringBuilder();
+        	
+        	System.out.println("________Vendedore DAO --> entidade.getID() = " + entidade.getId());
+    		if(entidade.getId() != 0) {
+    			if(entidade.getId() == -1) {
+    				sql.append("SELECT * FROM vendedores;");
+    				pst = connection.prepareStatement(sql.toString());
+    				
+    			}else{
+    				sql.append("SELECT * FROM vendedores WHERE ven_id=?");
+    				pst = connection.prepareStatement(sql.toString());
+    				pst.setInt(1, vendedorResult.getId());
+    				}
+    		}
+			if(vendedorResult.getCpf() != null) {
+				sql.append("SELECT * FROM vendedores WHERE ven_cpf=?");		
+				
+				pst = connection.prepareStatement(sql.toString());
+				
+				pst.setString(1, vendedorResult.getCpf());
+			}
+			
+        	
+
         	System.out.println("________Dentro do try do VendedorDAO " + sql);
-        	pst = connection.prepareStatement(sql);
+        	//pst = connection.prepareStatement(sql);
         	CidadeDAO cidDAO = new CidadeDAO();
         	rs = pst.executeQuery();
 //        	rs = pst.getResultSet();
-        	System.out.println("________ Query executada");
+        	System.out.println("________ Query executada" );
             while(rs.next()){
             	Vendedor vendedor = new Vendedor();
             	Endereco end = new Endereco();
@@ -186,12 +213,15 @@ public class VendedorDAO extends AbstractJdbcDAO {
             	cid.setId(rs.getInt("ven_cid_id"));
             	System.out.println("________ Query executada entidade iD => " + cid.getId() );
             	
-            	if(entidade.getId() != -1) {
-            		cidDAO.connection = connection;
-	    			cidDAO.ctrlTransaction = false;
-	    			cidResult = (Cidade) cidDAO.consultar(cid).get(0); 	
-	            	end.setCidade(cidResult);
+            	if(vendedorResult.getCpf() == null) {
+            		if(entidade.getId() != -1) {
+                		cidDAO.connection = connection;
+    	    			cidDAO.ctrlTransaction = false;
+    	    			cidResult = (Cidade) cidDAO.consultar(cid).get(0); 	
+    	            	end.setCidade(cidResult);
+                	}
             	}
+            	
 	            	
             	vendedor.setId(rs.getInt("ven_id"));
             	vendedor.setCpf(rs.getString("ven_cpf"));
@@ -208,7 +238,7 @@ public class VendedorDAO extends AbstractJdbcDAO {
             	listVendedores.add(vendedor);            
             }
             connection.commit();
-            System.out.println("________ Query executada entidade => " + listVendedores.get(0).getId());
+            
             return listVendedores;
 	
         

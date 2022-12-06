@@ -1,17 +1,31 @@
 package gestao.negocio.impl;
 
 import gestao.dominio.EntidadeDominio;
-
+import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
 
 public class ValidarEmail implements IStrategy {
 
 
-	/**
-	 * @see Classes.Strategys.IStrategy#processar(Classes.Entidade.EntidadeDominio)
-	 */
-	public void processar(EntidadeDominio entidade) {
-
+	public String processar(EntidadeDominio entidade) {
+		String mensagem = "";
+		
+		if(entidade instanceof Vendedor){
+			Vendedor vendedor = (Vendedor)entidade;
+					
+			String email = vendedor.getEmail();
+			if(isEmail(email)) {
+				return null;
+			}else {
+				return "Digite um E-mail válido";
+			}
+		}else{
+			return "Deve ser registrado um vendedor!";
+		}
+	}
+	
+	private boolean isEmail(String email) {
+		return email != null && email.matches("^[a-zA-Z0-9_!#$%&'\\*+/=?{|}~^.-]+@[a-zA-Z0-9.-]+$");
 	}
 
 }

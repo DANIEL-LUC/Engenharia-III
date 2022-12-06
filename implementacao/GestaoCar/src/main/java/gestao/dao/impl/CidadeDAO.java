@@ -148,12 +148,12 @@ public class CidadeDAO extends AbstractJdbcDAO {
 	
         
         }catch (SQLException e) {
-			try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();			
+//			try {
+//				//connection.rollback();
+//			} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}
+//			e.printStackTrace();			
 		}finally{
 			try {
 				//pst.close();

@@ -41,9 +41,11 @@
       <label for="subject"></label>
       <select placeholder="Marca" name="txtMarca" id="txtMarca" required>
         <option disabled hidden selected>Marca</option>
-        <option value="Marca_1">Marca_1</option>
-        <option value="Marca_2">Marca_2</option>
-        <option value="Marca_3">Marca_3</option>
+        <option value="Fiat">Fiat</option>
+        <option value="Volkswagen">Volkswagen</option>
+        <option value="Mercedes Benz">Mercedes Benz</option>
+        <option value="Renault">Renault</option>
+        <option value="Chevrolet">Chevrolet</option>
       </select>
     </div>
     <h1>Ficha técnica</h1>

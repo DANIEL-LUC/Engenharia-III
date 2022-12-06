@@ -25,7 +25,7 @@ request.getSession().setAttribute("resultado", resultado);
                 <h2 >
                     <a class="log" href="index.html">
                     
-                    Cadastro de automóveis
+                    Cadastro não realizado
                     </a>
                 </h2>
                 <%out.print(mensagem);%>
