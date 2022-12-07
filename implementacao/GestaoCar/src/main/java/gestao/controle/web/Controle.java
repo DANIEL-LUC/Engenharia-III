@@ -39,6 +39,7 @@ public class Controle extends HttpServlet {
     	vhs = new HashMap<String, IViewHelper>();
 		vhs.put("/GestaoCar/Automovel", new AutomovelVH());
 		vhs.put("/GestaoCar/Vendedor", new VendedorVH());
+		vhs.put("/GestaoCar/VendedorConsultaCpf", new VendedorVH());
 		vhs.put("/GestaoCar/ModeloAutomovel", new ModeloAutomovelVH());
 		
 		

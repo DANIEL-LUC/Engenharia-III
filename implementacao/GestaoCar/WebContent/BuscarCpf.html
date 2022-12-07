@@ -56,14 +56,15 @@
     </header>
     <section class="main">
        <div class="cursando">
-        Analise e Desenvolvimento de Sistemas
+        Digite o CPF do vendedor
        </div>
-       <div class="materia">
-            Engenharia de Software III
-       </div>
-       <div class="aluno">
-           Nome do aluno
-       </div>
+       <form name = "formCurso" action = "VendedorConsultaCpf" method="post">   
+      		<div>
+       			<input class="cpf" id="txtCPF" placeholder="CPF" name="txtCPF" type = "text" value = "" >
+       		</div>
+         	<input class="button" id="operacao" name="operacao" type = "submit" value = "Consultar" >    
+		</form>
+		
     
     </section>
     <div>

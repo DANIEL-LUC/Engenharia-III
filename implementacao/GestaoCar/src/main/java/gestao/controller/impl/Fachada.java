@@ -25,6 +25,7 @@ import gestao.negocio.impl.ValidarExistenciaVendedor;
 import gestao.negocio.impl.ValidarMarca;
 import gestao.negocio.impl.ValidarTipoAutomovel;
 import gestao.negocio.impl.VerificarEconomico;
+import gestao.negocio.impl.VerificarExistenciaCpf;
 import gestao.util.Resultado;
 
 public class Fachada implements IFachada {
@@ -69,6 +70,7 @@ public class Fachada implements IFachada {
 		VerificarEconomico verificarEconomia = new VerificarEconomico();
 	
 		List<IStrategy> rnsSalvarModeloAutomovel = new ArrayList<IStrategy>();
+		List<IStrategy> rnsConsultarModeloAutomovel = new ArrayList<IStrategy>();
 		/* Adicionando as regras a serem utilizadas na operação salvar do fornecedor*/
 		rnsSalvarModeloAutomovel.add(validarModelo);
 		rnsSalvarModeloAutomovel.add(classificacaoSocial);
@@ -83,6 +85,8 @@ public class Fachada implements IFachada {
 		ValidarEmail validarEmail = new ValidarEmail();
 		ValidarExistenciaVendedor existenciaVendedor = new ValidarExistenciaVendedor();
 		
+		VerificarExistenciaCpf verificarCpf = new VerificarExistenciaCpf();
+		
 		
 		// VENDEDOR REGRAS SALVAR
 		List<IStrategy> rnsSalvarVendedor = new ArrayList<IStrategy>();
@@ -92,13 +96,21 @@ public class Fachada implements IFachada {
 		rnsSalvarVendedor.add(validarEmail);
 		rnsSalvarVendedor.add(existenciaVendedor);
 		
+		// VENDEDOR REGRAS CONSULTAR
+		
+		List<IStrategy> rnsConsultarVendedor = new ArrayList<IStrategy>();
+		
+		rnsConsultarVendedor.add(verificarCpf);
+		
 		
 		Map<String, List<IStrategy>> regrasModeloAutomovel = new HashMap<String, List<IStrategy>>();
 
-		regrasModeloAutomovel.put("Salvar", rnsSalvarModeloAutomovel);	
+		regrasModeloAutomovel.put("Salvar", rnsSalvarModeloAutomovel);
+		
 		
 		Map<String, List<IStrategy>> regrasVendedor = new HashMap<String, List<IStrategy>>();
 		regrasVendedor.put("Salvar", rnsSalvarVendedor);
+		regrasVendedor.put("Consultar", rnsConsultarVendedor);
 		
 		regras.put(ModeloAutomovel.class.getName(), regrasModeloAutomovel);
 		regras.put(Vendedor.class.getName(), regrasVendedor);
@@ -196,7 +208,7 @@ public class Fachada implements IFachada {
 		String nmClasse = entidade.getClass().getName();	
 		
 		
-		String msg = executarRegras(entidade, "EXCLUIR");
+		String msg = executarRegras(entidade, "Consultar");
 		
 		if(msg == null){
 			IDAO dao = daos.get(nmClasse);

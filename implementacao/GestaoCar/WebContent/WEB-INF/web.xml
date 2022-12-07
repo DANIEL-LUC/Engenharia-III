@@ -42,4 +42,12 @@
     <url-pattern>/ModeloAutomovel</url-pattern>
   </servlet-mapping>
   
+     <servlet-mapping>
+    <servlet-name>Controle</servlet-name>
+    <url-pattern>/VendedorConsultaCpf</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
 </web-app>

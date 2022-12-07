@@ -41,8 +41,7 @@ public class VendedorVH implements IViewHelper {
 		if(operacao != null) {
 			if(operacao.equals("Editar") || operacao.equals("Consultar") || operacao.equals("Excluir") ) {
 				System.out.println("Dentro do is VH VEndedore id = " + id);
-				
-				v.setId(Integer.parseInt(id));
+				if(id != null) v.setId(Integer.parseInt(id));
 			}
 		}else {
 			v.setId(-1);
@@ -72,6 +71,8 @@ public class VendedorVH implements IViewHelper {
 			throws ServletException {
 		RequestDispatcher d=null;
 		
+		String uri = request.getRequestURI();
+		
 		String operacao = request.getParameter("operacao");
 		
 		
@@ -86,9 +87,17 @@ public class VendedorVH implements IViewHelper {
 				request.getSession().setAttribute("resultado", resultado);
 				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
 			}else if(operacao.equals("Consultar")) {
-				resultado.setMsg("Lista de Vendedores!");
-				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("EditarVendedor.jsp"); 
+				System.out.println("URI ------>>>>>>> "+ uri);
+				if(uri.equals("/GestaoCar/VendedorConsultaCpf") ) {
+					request.getSession().setAttribute("resultado", resultado);
+					d= request.getRequestDispatcher("BuscarModelo.jsp"); 
+				}else {
+					resultado.setMsg("Lista de Vendedores!");
+					request.getSession().setAttribute("resultado", resultado);
+					d= request.getRequestDispatcher("EditarVendedor.jsp"); 
+				}
+					
+				
 			}else if (operacao.equals("Editar")) {
 				resultado.setMsg("Vendedor editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);

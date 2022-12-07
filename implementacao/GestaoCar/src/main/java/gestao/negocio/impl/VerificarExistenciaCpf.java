@@ -9,8 +9,7 @@ import gestao.dominio.EntidadeDominio;
 import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
 
-public class ValidarExistenciaVendedor implements IStrategy {
-
+public class VerificarExistenciaCpf implements IStrategy {
 
 	public String processar(EntidadeDominio entidade) {
 		Vendedor vendedor = (Vendedor)entidade;
@@ -20,11 +19,10 @@ public class ValidarExistenciaVendedor implements IStrategy {
 		try {
 			vendedorResultado = vendedorDAO.consultar(vendedor);
 			if(vendedorResultado.size() != 0) {
-				vendedor = (Vendedor) vendedorResultado.get(0);
-				
-				return "CPF já cadastrado";
-			
+				return null;
 			}
+			
+			return "CPF não encontrado";
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
