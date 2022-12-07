@@ -89,8 +89,8 @@ public class VendedorVH implements IViewHelper {
 			}else if(operacao.equals("Consultar")) {
 				System.out.println("URI ------>>>>>>> "+ uri);
 				if(uri.equals("/GestaoCar/VendedorConsultaCpf") ) {
-					request.getSession().setAttribute("resultado", resultado);
-					d= request.getRequestDispatcher("BuscarModelo.jsp"); 
+					request.getSession().setAttribute("vendedor", resultado);
+					d= request.getRequestDispatcher("ConsultarModeloNome"); 
 				}else {
 					resultado.setMsg("Lista de Vendedores!");
 					request.getSession().setAttribute("resultado", resultado);

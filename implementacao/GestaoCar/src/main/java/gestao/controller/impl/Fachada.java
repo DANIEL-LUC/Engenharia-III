@@ -9,8 +9,10 @@ import java.util.Map;
 import gestao.controle.web.command.AbstractCommand;
 import gestao.controller.IFachada;
 import gestao.dao.IDAO;
+import gestao.dao.impl.AutomovelDAO;
 import gestao.dao.impl.ModeloAutomovelDAO;
 import gestao.dao.impl.VendedorDAO;
+import gestao.dominio.Automovel;
 import gestao.dominio.EntidadeDominio;
 import gestao.dominio.ModeloAutomovel;
 import gestao.dominio.Vendedor;
@@ -49,11 +51,12 @@ public class Fachada implements IFachada {
 		
 		VendedorDAO vendedorDAO = new VendedorDAO();
 		ModeloAutomovelDAO modeloDAO = new ModeloAutomovelDAO();
+		AutomovelDAO automovelDAo = new AutomovelDAO();
 		
 		
 		daos.put(ModeloAutomovel.class.getName(), modeloDAO);
 		daos.put(Vendedor.class.getName(), vendedorDAO);
-		
+		daos.put(Automovel.class.getName(), automovelDAo);
 		
 		
 //		ValidadorDadosObrigatoriosFornecedor vrDadosObrigatoriosFornecedor = new ValidadorDadosObrigatoriosFornecedor();

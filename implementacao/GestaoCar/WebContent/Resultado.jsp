@@ -58,9 +58,9 @@ request.getSession().setAttribute("resultado", resultado);
                 <div class="dropdown">
                     <button class="dropbtn">Automovel</button>
                     <div class="dropdown-content">
-                      <a class="buton" href="cadastrar-curso.html">CADASTRAR</a>
+                      <a class="buton" id="operacao" href="BuscarCpf.html">Cadastrar</a>
                       <form name = "formCurso" action = "csCurso" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CONSULTAR" >
+                        <a class="buton" href="Automovel">Consultar</a>
                       </form>
                     </div>
                   </div>

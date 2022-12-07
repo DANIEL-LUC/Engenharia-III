@@ -112,7 +112,7 @@ display: block;
 .main{
     width: 100%;
     text-align: center ;
-    
+    flex:1;
     background-color: #e0ecf3;
 }
 .cursando{

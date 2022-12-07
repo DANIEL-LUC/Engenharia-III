@@ -1,12 +1,34 @@
+<%@ page
+	import="gestao.util.Resultado, gestao.dominio.*, java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+
+<!DOCTYPE html>
 <html>
 <head>
-<title>Cadastro de Automoveis</title>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="img/alunos-121x121.png">
 <link rel="stylesheet" href="css/style.css">
+<title>Busca Modelo</title>
 </head>
 <body>
-    <header>
+<%
+		Resultado resultado = (Resultado) session.getAttribute("resultado");
+		Resultado vendedor = (Resultado) session.getAttribute("vendedor");
+		List<EntidadeDominio> entidades = vendedor.getEntidades();
+		
+		Vendedor v = (Vendedor) entidades.get(0);
+		
+		System.out.print(v.getId());
+		
+	%>
+	<%!
+  public void method()  {
+		System.out.print("OLAAAAA");
+  };
+%>
+<header>
         <div class= "center">
             <div class = "logo">
                 <h2 >
@@ -56,13 +78,48 @@
     </header>
     <section class="main">
        <div class="cursando">
-        Digite o CPF do vendedor
+        Selecione o modelo do Automovel
        </div>
-       <form name = "formCurso" action = "VendedorConsultaCpf" method="post">   
+       <form name = "formCurso" action = "CadastrarAutomovel.jsp" method="get"> 
+       <input TYPE="hidden" id="txtIdVendedor" name="txtIdVendedor" required="required" value=<%out.print(v.getId());%>><br>  
       		<div>
-       			<input class="cpf" id="txtCPF" placeholder="CPF" name="txtCPF" type = "text" value = "" >
+       			<select class="buttonSelect"  name="txtIdModelo" id="txtCambio" required>
+		        <option disabled hidden selected>Modelos de Automoveis</option>
+    
+		 <%
+			if (resultado != null) {
+				List<EntidadeDominio> entidadesModelo = resultado.getEntidades();
+				StringBuilder sbRegistro = new StringBuilder();
+				StringBuilder sbLink = new StringBuilder();
+				StringBuilder sbLinkExcluir = new StringBuilder();
+
+				if (entidadesModelo != null) {
+					for (int i = 0; i < entidadesModelo.size(); i++) {
+						ModeloAutomovel m = (ModeloAutomovel) entidadesModelo.get(i);
+						sbRegistro.setLength(0);
+						sbLink.setLength(0);
+
+						
+						sbRegistro.append("<option value=");
+						sbRegistro.append(m.getId());
+						sbRegistro.append(">");
+						sbRegistro.append(m.getNome());
+						sbRegistro.append("</option>");
+						
+						out.print(sbRegistro.toString());
+
+					}
+				}
+
+			}
+		%>
+		        
+		        
+		        
+		     </select>
+		     <input class="button" id="operacao" name="operacao" type = "submit" value = "Consultar" >
        		</div>
-         	<input class="button" id="operacao" name="operacao" type = "submit" value = "Consultar" >    
+         	    
 		</form>
 		
     
@@ -75,4 +132,4 @@
         
     </div>
 </body>
-</html>  
+</html>

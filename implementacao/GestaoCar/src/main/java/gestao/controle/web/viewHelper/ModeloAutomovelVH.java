@@ -30,7 +30,12 @@ public class ModeloAutomovelVH implements IViewHelper {
 			if( operacao.equals("Consultar") || operacao.equals("Excluir") ) {
 				System.out.println("Dentro do is VH Modelo id = " + id);
 				
-				m.setId(Integer.parseInt(id));
+				if(id != null) {
+					m.setId(Integer.parseInt(id));
+				}else {
+					m.setId(-1);
+					return m;
+				}
 				return m;
 			}else if(operacao.equals("Editar")) {
 				m.setId(Integer.parseInt(id));
@@ -106,6 +111,8 @@ public class ModeloAutomovelVH implements IViewHelper {
 			throws ServletException {
 		RequestDispatcher d=null;
 		
+		String uri = request.getRequestURI();
+		
 		String operacao = request.getParameter("operacao");
 		
 		
@@ -118,11 +125,20 @@ public class ModeloAutomovelVH implements IViewHelper {
 			}else if(operacao.equals("Cadastrar")){
 				resultado.setMsg("Modelo cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarModelo.jsp"); 
+				d= request.getRequestDispatcher("FormConsultarModelo.jsp");
+				
 			}else if(operacao.equals("Consultar")) {
-				resultado.setMsg("Lista de modelos de automoveis!");
+				
+				if(uri.equals("/GestaoCar/ConsultarModeloNome")) {
+					resultado.setMsg("Modelos!");
+					request.getSession().setAttribute("resultado", resultado);
+					d= request.getRequestDispatcher("BuscarModelo.jsp");
+				}else {
+					resultado.setMsg("Lista de modelos de automoveis!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("EditarModelo.jsp"); 
+				d= request.getRequestDispatcher("EditarModelo.jsp");
+				}
+				 
 			}else if (operacao.equals("Editar")) {
 				resultado.setMsg("Modelo editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);

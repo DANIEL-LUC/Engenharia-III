@@ -45,8 +45,8 @@
                     <button class="dropbtn">Automovel</button>
                     <div class="dropdown-content">
                       <a class="buton" id="operacao" href="BuscarCpf.html">Cadastrar</a>
-                      <form name = "formCurso" action = "csCurso" method="get">   
-                        <input class="buton" id="operacao" name="operacao" type = "submit" value = "CONSULTAR" >
+                      <form name = "formCurso" action = "Automovel" method="get">   
+                        <a class="buton" href="Automovel">Consultar</a>
                       </form>
                     </div>
                   </div>
@@ -60,9 +60,6 @@
        </div>
        <div class="materia">
             Engenharia de Software III
-       </div>
-       <div class="aluno">
-           Nome do aluno
        </div>
     
     </section>

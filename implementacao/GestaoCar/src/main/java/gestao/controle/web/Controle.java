@@ -41,7 +41,7 @@ public class Controle extends HttpServlet {
 		vhs.put("/GestaoCar/Vendedor", new VendedorVH());
 		vhs.put("/GestaoCar/VendedorConsultaCpf", new VendedorVH());
 		vhs.put("/GestaoCar/ModeloAutomovel", new ModeloAutomovelVH());
-		
+		vhs.put("/GestaoCar/ConsultarModeloNome", new ModeloAutomovelVH());
 		
 		
 		commands = new HashMap<String, ICommand>();

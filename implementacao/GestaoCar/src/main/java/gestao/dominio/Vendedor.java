@@ -19,9 +19,14 @@ public class Vendedor extends EntidadeDominio {
 	
 	
 	public Vendedor() {
-		
+		super();
 	}
 	
+
+	public Vendedor(int id) {
+		setId(id);
+	}
+
 
 	public String getCpf() {
 		return cpf;

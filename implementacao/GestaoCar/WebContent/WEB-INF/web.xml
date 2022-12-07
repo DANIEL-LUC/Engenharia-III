@@ -47,6 +47,11 @@
     <url-pattern>/VendedorConsultaCpf</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>Controle</servlet-name>
+    <url-pattern>/ConsultarModeloNome</url-pattern>
+  </servlet-mapping>
+  
   
   
   

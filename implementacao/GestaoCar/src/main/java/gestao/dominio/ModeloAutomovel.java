@@ -32,6 +32,9 @@ public class ModeloAutomovel extends EntidadeDominio{
 	public ModeloAutomovel() {
 		super();
 	}
+	public ModeloAutomovel(int id) {
+		setId(id);
+	}
 
 	public String getNome() {
 		return nome;

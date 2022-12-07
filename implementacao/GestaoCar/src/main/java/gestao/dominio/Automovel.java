@@ -2,19 +2,19 @@ package gestao.dominio;
 
 public class Automovel extends EntidadeDominio {
 
-	private String ano_fabricacao;
+	private String anoFabricacao;
 
-	private float km_rodado;
+	private float kmRodado;
 
 	private String descricao;
 
 	private boolean tv;
 
-	private String cor_externa;
+	private String corExterna;
 
 	private float preco;
 
-	private boolean publicado;
+	private String publicado;
 
 	private String condicao;
 
@@ -34,20 +34,20 @@ public class Automovel extends EntidadeDominio {
 		super();
 	}
 
-	public String getAno_fabricacao() {
-		return ano_fabricacao;
+	public String getAnoFabricacao() {
+		return anoFabricacao;
 	}
 
-	public void setAno_fabricacao(String ano_fabricacao) {
-		this.ano_fabricacao = ano_fabricacao;
+	public void setAnoFabricacao(String ano_fabricacao) {
+		this.anoFabricacao = ano_fabricacao;
 	}
 
-	public float getKm_rodado() {
-		return km_rodado;
+	public float getKmRodado() {
+		return kmRodado;
 	}
 
-	public void setKm_rodado(float km_rodado) {
-		this.km_rodado = km_rodado;
+	public void setKmRodado(float kmRodado) {
+		this.kmRodado = kmRodado;
 	}
 
 	public String getDescricao() {
@@ -66,12 +66,12 @@ public class Automovel extends EntidadeDominio {
 		this.tv = tv;
 	}
 
-	public String getCor_externa() {
-		return cor_externa;
+	public String getCorExterna() {
+		return corExterna;
 	}
 
-	public void setCor_externa(String cor_externa) {
-		this.cor_externa = cor_externa;
+	public void setCorExterna(String cor_externa) {
+		this.corExterna = cor_externa;
 	}
 
 	public float getPreco() {
@@ -82,11 +82,11 @@ public class Automovel extends EntidadeDominio {
 		this.preco = preco;
 	}
 
-	public boolean isPublicado() {
+	public String isPublicado() {
 		return publicado;
 	}
 
-	public void setPublicado(boolean publicado) {
+	public void setPublicado(String publicado) {
 		this.publicado = publicado;
 	}
 
