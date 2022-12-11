@@ -26,7 +26,6 @@ public class AutomovelVH implements IViewHelper{
 
 	}
 
-
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
 		System.out.println("DENTRO DA VIEW HELPER Automovel");
@@ -91,9 +90,7 @@ public class AutomovelVH implements IViewHelper{
 		m.setVin(vin);
 		m.setDescricao(descricao);
 		
-		
-		
-		
+
 
 		return m;
 	}

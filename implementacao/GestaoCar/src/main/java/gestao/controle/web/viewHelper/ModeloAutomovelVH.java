@@ -142,7 +142,7 @@ public class ModeloAutomovelVH implements IViewHelper {
 			}else if (operacao.equals("Editar")) {
 				resultado.setMsg("Modelo editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarModelo.jsp"); 
+				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}else if (operacao.equals("Excluir")) {
 				resultado.setMsg("Modelo excluido com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);

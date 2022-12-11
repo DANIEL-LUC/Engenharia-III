@@ -30,7 +30,7 @@
 
 	<TABLE BORDER="5" WIDTH="50%" CELLPADDING="4" CELLSPACING="3">
 		<TR>
-			<TH COLSPAN="7"><BR>
+			<TH COLSPAN="9"><BR>
 				<H3>MODELOS DE AUTOMOVEIS</H3></TH>
 		</TR>
 
@@ -42,6 +42,8 @@
 			<TH>Ano de Lançamento:</TH>
 			<TH>Preço médio:</TH>
 			<TH>Consumo Energético:</TH>
+			<TH>Classe Social:</TH>
+			<TH>É Econômico:</TH>
 		</TR>
 
 
@@ -118,6 +120,18 @@
 						sbRegistro.append(sbLink.toString());
 						sbRegistro.append(m.getEspecificacaoTecnica().getKmLitro());
 						sbRegistro.append(" MJ/Km</a>");
+						sbRegistro.append("</TD>");
+						
+						sbRegistro.append("<TD>");
+						sbRegistro.append(sbLink.toString());
+						sbRegistro.append(m.getClassifacaoSocial().getClassificao());
+						sbRegistro.append("</TD>");
+						
+						
+						sbRegistro.append("<TD>");
+						sbRegistro.append(sbLink.toString());
+						String social = (m.isEconomico() ? "Sim" : "Não");
+						sbRegistro.append(social);
 						sbRegistro.append("</TD>");
 						
 						sbRegistro.append("<TD>");

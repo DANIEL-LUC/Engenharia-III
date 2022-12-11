@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/formVendedorStyle.css">
 <title>Venda de carros</title>
 </head>
 <body>
@@ -14,8 +15,8 @@
 			Resultado resultado = (Resultado) session.getAttribute("resultado");
 			Vendedor vendedor = (Vendedor)resultado.getEntidades().get(0);
 		%>
-	<h1>Editar</h1>
-	<form action="Vendedor" method="post">
+	
+	<form class="formulario"  action="Vendedor" method="post">
 		
 		<div id="formularioVendedor" class="formularioVendedor">
 
@@ -25,25 +26,23 @@
                     <input TYPE="hidden" id="txtId" name="txtId" required="required" value=<c:out value="${resultado.getEntidades().get(0).getId()}"/>><br>
               		
                 </div>
-                <div class="msgObrigatoria">
-                    <label> Os campos destacados em vermelho são de preenchimento obrigatório.</label>
-                </div> <br>
-                <div class="campoCPF">
+                
+                <div class="metade left">
                     <label>CPF </label>
                     <input type="text" id="txtCPF" name="txtCPF" required="required" value=<c:out value="${resultado.getEntidades().get(0).getCpf()}"/> ><br>
-                </div>
-                <div class="campoNomeVendedor">
-                    <label>Nome Vendedor</label>
+               		<label>Nome Vendedor</label>
                     <input type="text" id="txtNomeVendedor" name="txtNomeVendedor" required="required" value="<%out.print(vendedor.getNome());%>"><br>
                 </div>
-                 <div class="campoEmail">
+               
+
+               
+                 <div class="metade right">
                     <label>E-mail</label>
                     <input type="text" id="txtEmail" name="txtEmail" required="required" value=<c:out value="${resultado.getEntidades().get(0).getEmail()}"/> ><br>
-                </div>
-                 <div class="campoTelefone">
-                    <label>Telefone</label>
+               		<label>Telefone</label>
                     <input type="text" id="txtTelefone" name="txtTelefone" required="required" value=<c:out value="${resultado.getEntidades().get(0).getTelefone()}"/>><br>
                 </div>
+                
                 
         </div>
         

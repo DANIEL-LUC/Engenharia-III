@@ -9,6 +9,7 @@ import java.util.List;
 
 import gestao.dao.AbstractJdbcDAO;
 import gestao.dominio.Cidade;
+import gestao.dominio.ClassificacaoSocial;
 import gestao.dominio.Endereco;
 import gestao.dominio.EntidadeDominio;
 import gestao.dominio.EspecificacaoTecnica;
@@ -181,6 +182,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
             	Marca marca = new Marca(rs.getString("mod_marca"));
             	EspecificacaoTecnica tecnica = new EspecificacaoTecnica();
             	TipoAutomovel tipo = new TipoAutomovel(rs.getString("mod_tipo"));
+            	ClassificacaoSocial social = new ClassificacaoSocial(rs.getString("mod_class_social"));
             
             	
             	modelo.setId(rs.getInt("mod_id"));
@@ -189,6 +191,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
             	modelo.setAcento(rs.getInt("mod_acentos"));
             	modelo.setPortas(rs.getInt("mod_portas"));
             	modelo.setMediaPreco(rs.getFloat("mod_preco"));
+            	modelo.setEconomico(rs.getBoolean("mod_economico"));
             	
             	tecnica.setCambio(rs.getString("mod_cambio"));
             	tecnica.setCombustivel(rs.getString("mod_combustivel"));
@@ -199,6 +202,7 @@ public class ModeloAutomovelDAO extends AbstractJdbcDAO {
             	modelo.setTipoAutomovel(tipo);
             	modelo.setEspecificacaoTecnica(tecnica);
             	modelo.setMarca(marca);
+            	modelo.setClassifacaoSocial(social);
             	
             	
          

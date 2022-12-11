@@ -98,10 +98,11 @@ public class VendedorVH implements IViewHelper {
 				}
 					
 				
+				
 			}else if (operacao.equals("Editar")) {
 				resultado.setMsg("Vendedor editado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
+				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}else if (operacao.equals("Excluir")) {
 				resultado.setMsg("Vendedor excluido com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);

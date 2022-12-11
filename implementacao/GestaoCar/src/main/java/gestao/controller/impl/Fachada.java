@@ -179,15 +179,7 @@ public class Fachada implements IFachada {
 		resultado = new Resultado();
 		String nmClasse = entidade.getClass().getName();	
 		
-		
-//		IDAO dao = daos.get(nmClasse);
-//		dao.alterar(entidade);
-//		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-//		entidades.add(0, entidade);
-//		resultado.setEntidades(entidades);
-//		
-		
-		
+
 		String msg = executarRegras(entidade, "Editar");
 	
 		if(msg == null){
