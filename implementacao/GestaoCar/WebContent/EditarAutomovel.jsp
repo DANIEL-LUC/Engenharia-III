@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="css/styleCadModelo.css">
-<title>Insert title here</title>
+<title>Editar</title>
 </head>
 <body>
 <%
@@ -22,7 +22,7 @@
 		
 		
 		String corSelect = "<option value="+automovel.getCorExterna()+">"+automovel.getCorExterna()+"</option>";
-		out.print("sssssssssssssssssssss"+automovel.getId());
+		
 	%>
 	
 	

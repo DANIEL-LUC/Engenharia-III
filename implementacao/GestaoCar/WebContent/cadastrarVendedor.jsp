@@ -7,12 +7,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/formVendedorStyle.css">
 <title>Venda de carros</title>
 </head>
 <body>
 		
 
-	<form action="Vendedor" method="post">
+	<form class="formulario" action="Vendedor" method="post">
 		
 		<div id="formularioVendedor" class="formularioVendedor">
 
@@ -22,25 +23,22 @@
                     <input TYPE="hidden" id="txtId" name="txtId" required="required" value=""><br>
               		
                 </div>
-                <div class="msgObrigatoria">
-                    <label> Os campos destacados em vermelho são de preenchimento obrigatório.</label>
-                </div> <br>
-                <div class="campoCPF">
+                
+                <div class="metade left">
                     <label>CPF </label>
                     <input type="text" id="txtCPF" name="txtCPF" required="required" value=""><br>
-                </div>
-                <div class="campoNomeVendedor">
                     <label>Nome Vendedor</label>
                     <input type="text" id="txtNomeVendedor" name="txtNomeVendedor" required="required" value=""><br>
+                    
                 </div>
-                 <div class="campoEmail">
+                
+                 <div class="metade right">
                     <label>E-mail</label>
                     <input type="text" id="txtEmail" name="txtEmail" required="required" value="" ><br>
-                </div>
-                 <div class="campoTelefone">
                     <label>Telefone</label>
                     <input type="text" id="txtTelefone" name="txtTelefone" required="required" value=""><br>
                 </div>
+                
                 
         </div>
         

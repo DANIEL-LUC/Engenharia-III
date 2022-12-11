@@ -40,15 +40,15 @@ public class AutomovelDAO extends AbstractJdbcDAO{
 		ResultSet rs =null;
 		Automovel automovel = (Automovel)entidade;
 		
-		System.out.println("______________________________>> classificação "+ automovel.getCorExterna());
+		System.out.println("______________________________>> Condição "+ automovel.getCondicao());
 		try {
 			connection.setAutoCommit(false);
 			System.out.println("Deu CERTOOOOOO");
 				
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO automoveis(aut_vin, aut_ano, aut_preco, aut_cor, aut_km_rodado,");
-			sql.append("aut_publicar, aut_ven_id, aut_mod_id, aut_descricao ) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?)");		
+			sql.append("aut_publicar, aut_ven_id, aut_mod_id, aut_descricao, aut_condicao ) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");		
 					
 			pst = connection.prepareStatement(sql.toString(), 
 					Statement.RETURN_GENERATED_KEYS);
@@ -58,10 +58,11 @@ public class AutomovelDAO extends AbstractJdbcDAO{
 			pst.setFloat(3, automovel.getPreco());
 			pst.setString(4,automovel.getCorExterna());
 			pst.setFloat(5, automovel.getKmRodado());
-			pst.setString(6, automovel.isPublicado());
+			pst.setString(6, automovel.getPublicado());
 			pst.setInt(7, automovel.getVendedor().getId());
 			pst.setInt(8, automovel.getModeloAutomovel().getId());
 			pst.setString(9, automovel.getDescricao());
+			pst.setString(10, automovel.getCondicao());
 			
 			//Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
 			//pst.setTimestamp(4, time);
@@ -110,7 +111,7 @@ public class AutomovelDAO extends AbstractJdbcDAO{
 			
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE automoveis SET aut_vin=?, aut_ano=?, aut_preco=?, ");
-			sql.append("aut_cor=?, aut_km_rodado=?, aut_ven_id=?, aut_mod_id=? WHERE aut_id=?");		
+			sql.append("aut_cor=?, aut_km_rodado=?, aut_ven_id=?, aut_mod_id=?, aut_condicao=? WHERE aut_id=?");		
 					
 			pst = connection.prepareStatement(sql.toString());
 			
@@ -121,7 +122,8 @@ public class AutomovelDAO extends AbstractJdbcDAO{
 			pst.setFloat(5, automovel.getKmRodado());
 			pst.setInt(6, automovel.getVendedor().getId());
 			pst.setFloat(7, automovel.getModeloAutomovel().getId());
-			pst.setFloat(8, automovel.getId());
+			pst.setString(8,automovel.getCondicao());
+			pst.setFloat(9, automovel.getId());
 			
 			//Timestamp time = new Timestamp(fornecedor.getDtCadastro().getTime());
 			//pst.setTimestamp(4, time);
@@ -153,25 +155,35 @@ public class AutomovelDAO extends AbstractJdbcDAO{
 		PreparedStatement pst=null;
 		ResultSet rs =null;
 		List<EntidadeDominio> listAutomoveis = new ArrayList();
+		Automovel automovelResult = (Automovel)entidade;
 		
-		String sql = null;
+		StringBuilder sql = new StringBuilder();
 		
 		System.out.println("Automoveis DAO --> entidade.getID() = " + entidade.getId());
 		if(entidade.getId() != 0) {
 			if(entidade.getId() == -1) {
-				sql = "SELECT * FROM automoveis;";
+				sql.append("SELECT * FROM automoveis;");
+				pst = connection.prepareStatement(sql.toString());
 			}else{
-				sql = "SELECT * FROM automoveis WHERE aut_id = ";
-				sql += entidade.getId() + ";";
+				sql.append("SELECT * FROM automoveis WHERE aut_id = ");
+				pst = connection.prepareStatement(sql.toString());
+				pst.setInt(1, automovelResult.getId());
 				}
 		}
+		if(automovelResult.getVin() != null) {
+			sql.append("SELECT * FROM automoveis WHERE aut_vin=?");		
+			
+			pst = connection.prepareStatement(sql.toString());
+			
+			pst.setString(1, automovelResult.getVin());
+		}
 		
-		System.out.println("________SQL => " + sql);
+		System.out.println("________SQL => " + automovelResult.getVin());
 		
         try{
         	connection.setAutoCommit(false);
         	System.out.println("________Dentro do try do modeloDAO " + sql);
-        	pst = connection.prepareStatement(sql);
+        	
         	ModeloAutomovelDAO modDAO = new ModeloAutomovelDAO();
         	VendedorDAO venDAO = new VendedorDAO();
         	
@@ -203,13 +215,14 @@ public class AutomovelDAO extends AbstractJdbcDAO{
             	automovel.setKmRodado(rs.getFloat("aut_km_rodado"));
             	automovel.setPreco(rs.getFloat("aut_preco"));
             	automovel.setVin(rs.getString("aut_vin"));
+            	automovel.setCondicao(rs.getString("aut_condicao"));
             	           	
          
                 
             	listAutomoveis.add(automovel);            
             }
             connection.commit();
-            System.out.println("________ Query executada entidade => " + listAutomoveis.get(0).getId());
+            
             return listAutomoveis;
 	
         

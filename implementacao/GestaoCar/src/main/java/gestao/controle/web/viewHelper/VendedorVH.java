@@ -85,7 +85,7 @@ public class VendedorVH implements IViewHelper {
 			}else if(operacao.equals("Cadastrar")){
 				resultado.setMsg("Vendedor cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarVendedor.jsp"); 
+				d= request.getRequestDispatcher("Resultado.jsp"); 
 			}else if(operacao.equals("Consultar")) {
 				System.out.println("URI ------>>>>>>> "+ uri);
 				if(uri.equals("/GestaoCar/VendedorConsultaCpf") ) {

@@ -125,7 +125,7 @@ public class ModeloAutomovelVH implements IViewHelper {
 			}else if(operacao.equals("Cadastrar")){
 				resultado.setMsg("Modelo cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("FormConsultarModelo.jsp");
+				d= request.getRequestDispatcher("Resultado.jsp");
 				
 			}else if(operacao.equals("Consultar")) {
 				

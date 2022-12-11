@@ -19,13 +19,18 @@ import gestao.dominio.Vendedor;
 import gestao.negocio.IStrategy;
 import gestao.negocio.impl.CompletarClassificacaoSocial;
 import gestao.negocio.impl.ValidarCombustivel;
+import gestao.negocio.impl.ValidarCondicao;
 import gestao.negocio.impl.ValidarCpf;
+import gestao.negocio.impl.ValidarDadosAutomovel;
 import gestao.negocio.impl.ValidarDadosObrgModelo;
 import gestao.negocio.impl.ValidarDadosVendedor;
+import gestao.negocio.impl.ValidarData;
 import gestao.negocio.impl.ValidarEmail;
+import gestao.negocio.impl.ValidarExistenciaAutomovel;
 import gestao.negocio.impl.ValidarExistenciaVendedor;
 import gestao.negocio.impl.ValidarMarca;
 import gestao.negocio.impl.ValidarTipoAutomovel;
+import gestao.negocio.impl.ValidarVIN;
 import gestao.negocio.impl.VerificarEconomico;
 import gestao.negocio.impl.VerificarExistenciaCpf;
 import gestao.util.Resultado;
@@ -59,11 +64,7 @@ public class Fachada implements IFachada {
 		daos.put(Automovel.class.getName(), automovelDAo);
 		
 		
-//		ValidadorDadosObrigatoriosFornecedor vrDadosObrigatoriosFornecedor = new ValidadorDadosObrigatoriosFornecedor();
-//		ValidadorCnpj vCnpj = new ValidadorCnpj();
-//		ComplementarDtCadastro cDtCadastro = new ComplementarDtCadastro();
-//		ValidadorCpf vCpf = new ValidadorCpf();
-//		ValidadorQtdProduto vQtd = new ValidadorQtdProduto();
+		// REGRAS MODELO 
 		
 		ValidarDadosObrgModelo validarModelo = new ValidarDadosObrgModelo();
 		CompletarClassificacaoSocial classificacaoSocial = new CompletarClassificacaoSocial();
@@ -74,7 +75,7 @@ public class Fachada implements IFachada {
 	
 		List<IStrategy> rnsSalvarModeloAutomovel = new ArrayList<IStrategy>();
 		List<IStrategy> rnsConsultarModeloAutomovel = new ArrayList<IStrategy>();
-		/* Adicionando as regras a serem utilizadas na operação salvar do fornecedor*/
+		
 		rnsSalvarModeloAutomovel.add(validarModelo);
 		rnsSalvarModeloAutomovel.add(classificacaoSocial);
 		rnsSalvarModeloAutomovel.add(validarCombustive);
@@ -83,11 +84,15 @@ public class Fachada implements IFachada {
 		rnsSalvarModeloAutomovel.add(verificarEconomia);		
 		
 		
+		Map<String, List<IStrategy>> regrasModeloAutomovel = new HashMap<String, List<IStrategy>>();
+
+		regrasModeloAutomovel.put("Salvar", rnsSalvarModeloAutomovel);
+		
+		// |||||||||||| REGRAS VENDEDOR
 		ValidarDadosVendedor  validarDados = new ValidarDadosVendedor();
 		ValidarCpf validarCPF = new ValidarCpf();
 		ValidarEmail validarEmail = new ValidarEmail();
 		ValidarExistenciaVendedor existenciaVendedor = new ValidarExistenciaVendedor();
-		
 		VerificarExistenciaCpf verificarCpf = new VerificarExistenciaCpf();
 		
 		
@@ -105,18 +110,44 @@ public class Fachada implements IFachada {
 		
 		rnsConsultarVendedor.add(verificarCpf);
 		
-		
-		Map<String, List<IStrategy>> regrasModeloAutomovel = new HashMap<String, List<IStrategy>>();
-
-		regrasModeloAutomovel.put("Salvar", rnsSalvarModeloAutomovel);
-		
-		
 		Map<String, List<IStrategy>> regrasVendedor = new HashMap<String, List<IStrategy>>();
 		regrasVendedor.put("Salvar", rnsSalvarVendedor);
 		regrasVendedor.put("Consultar", rnsConsultarVendedor);
 		
+		
+		
+		// ||||||||  REGRAS AUTOMOVEL
+		
+		ValidarDadosAutomovel validarDadosAutomovel = new ValidarDadosAutomovel();
+		ValidarData validarData = new ValidarData();
+		ValidarCondicao validarCondicao = new ValidarCondicao();
+		ValidarVIN validarVin = new ValidarVIN();
+		ValidarExistenciaAutomovel validarExistenciaVIN = new ValidarExistenciaAutomovel();
+		
+		List<IStrategy> rnsSalvarAutomovel = new ArrayList<IStrategy>();
+		List<IStrategy> rnsConsultarAutomovel = new ArrayList<IStrategy>();
+		List<IStrategy> rnsEditarAutomovel = new ArrayList<IStrategy>();
+		
+		rnsSalvarAutomovel.add(validarDadosAutomovel);
+		rnsSalvarAutomovel.add(validarData);
+		rnsSalvarAutomovel.add(validarCondicao);
+		rnsSalvarAutomovel.add(validarVin);
+		rnsSalvarAutomovel.add(validarExistenciaVIN);
+		
+		rnsEditarAutomovel.add(validarDadosAutomovel);
+		rnsEditarAutomovel.add(validarData);
+		rnsEditarAutomovel.add(validarCondicao);
+		
+		
+		
+		Map<String, List<IStrategy>> regrasAutomovel = new HashMap<String, List<IStrategy>>();
+		regrasAutomovel.put("Salvar", rnsSalvarAutomovel);
+		regrasAutomovel.put("Editar", rnsEditarAutomovel);
+		
+		//:::::: ADICIONANDO REGRAS NO MAP
 		regras.put(ModeloAutomovel.class.getName(), regrasModeloAutomovel);
 		regras.put(Vendedor.class.getName(), regrasVendedor);
+		regras.put(Automovel.class.getName(), regrasAutomovel);
 	
 		
 	}
@@ -149,27 +180,27 @@ public class Fachada implements IFachada {
 		String nmClasse = entidade.getClass().getName();	
 		
 		
-		IDAO dao = daos.get(nmClasse);
-		dao.alterar(entidade);
-		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-		entidades.add(0, entidade);
-		resultado.setEntidades(entidades);
+//		IDAO dao = daos.get(nmClasse);
+//		dao.alterar(entidade);
+//		List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+//		entidades.add(0, entidade);
+//		resultado.setEntidades(entidades);
+//		
 		
 		
-		
-		//String msg = executarRegras(entidade, "Editar");
+		String msg = executarRegras(entidade, "Editar");
 	
-//		if(msg == null){
-//			IDAO dao = daos.get(nmClasse);
-//			dao.alterar(entidade);
-//			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-//			entidades.add(0, entidade);
-//			resultado.setEntidades(entidades);
-//		}else{
-//			resultado.setMsg(msg);
-//					
-//			
-//		}
+		if(msg == null){
+			IDAO dao = daos.get(nmClasse);
+			dao.alterar(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(0, entidade);
+			resultado.setEntidades(entidades);
+		}else{
+			resultado.setMsg(msg);
+					
+			
+		}
 		
 		return resultado;
 
@@ -246,11 +277,14 @@ public class Fachada implements IFachada {
 		
 		Map<String, List<IStrategy>> regrasOperacao = regras.get(nmClasse);
 		
-		
+		System.out.println("exevutar regra=== "+nmClasse);
+		System.out.println("exevutar regra=== "+nmClasse);
 		if(regrasOperacao != null){
+			System.out.println("exevutar === "+nmClasse);
 			List<IStrategy> regras = regrasOperacao.get(operacao);
 			
 			if(regras != null){
+				System.out.println("regrasssssssssss === ");
 				for(IStrategy s: regras){			
 					String m = s.processar(entidade);			
 					

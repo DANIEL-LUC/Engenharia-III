@@ -82,7 +82,7 @@ public class Automovel extends EntidadeDominio {
 		this.preco = preco;
 	}
 
-	public String isPublicado() {
+	public String getPublicado() {
 		return publicado;
 	}
 

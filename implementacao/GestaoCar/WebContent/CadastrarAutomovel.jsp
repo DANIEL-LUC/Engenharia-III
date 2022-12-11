@@ -36,15 +36,15 @@
     </div>
     <div class="anoLancamento">
       <label for="name">Ano de Fabricação</label>
-      <input type="date" placeholder="Ano Fabricação" name="txtAnoFabricacao" id="txtAnoFabricacao" required>
+      <input type="date" placeholder="Ano Fabricação" name="txtAnoFabricacao" id="txtAnoFabricacao" >
     </div>
     <div class="preco">
       <label for="name"></label>
-      <input type="number" step="0.01" placeholder="Preço R$" name="txtPreco" id="txtPreco" required>
+      <input type="number" step="0.01" placeholder="Preço R$" name="txtPreco" id="txtPreco" >
     </div>
     <div class="subject">
       <label for="subject"></label>
-      <select placeholder="Cor Externa" name="txtCor" id="txtCor" required>
+      <select placeholder="Cor Externa" name="txtCor" id="txtCor" >
         <option disabled hidden selected>Cor Externa</option>
         <option value="Azul">Azul</option>
         <option value="Cinza">Cinza</option>
@@ -60,11 +60,12 @@
 
     <div class="valorLeft">
       <label for="name"></label>
-      <input type="number" step="0.01" placeholder="Km rodado" name="numberKmRodado" id="numberKmRodado" required>
+      <input type="number" step="0.01" placeholder="Km rodado" name="numberKmRodado" id="numberKmRodado" >
     </div>
    
     <div class="subject">
       <label for="subject">Publicar:</label>
+      
     <select name="txtPublicar" id="txtPublicar" required>
         <option value="nao">Não</option>
         <option value="sim">Sim</option>

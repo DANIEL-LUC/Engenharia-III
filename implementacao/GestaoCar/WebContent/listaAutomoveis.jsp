@@ -13,19 +13,16 @@
 <title>:::: CONSULTAR MODELO::::</title>
 </head>
 <body>
-	<a href="index.jsp">Home</a>
+	<a href="index.jsp">  <h2>Home</h2>   </a>
 	<%
 		Resultado resultado = (Resultado) session.getAttribute("resultado");
 	%>
 
 
-	<a href="BuscarCpf.html">Novo</a>
+	<a href="BuscarCpf.html">
+		<h2>Novo</h2>
+	</a>
 
-	<%
-		if (resultado != null && resultado.getMsg() != null) {
-			out.print(resultado.getMsg());
-		}
-	%>
 	<BR>
 
 	<TABLE BORDER="5" WIDTH="50%" CELLPADDING="4" CELLSPACING="3">
@@ -42,7 +39,8 @@
 			<TH>Km Rodado:</TH>
 			<TH>Modelo:</TH>
 			<TH>Marca:</TH>
-			<TH>Marca:</TH>
+			<TH>Condição:</TH>
+			<TH>Excluir:</TH>
 		</TR>
 
 
@@ -119,6 +117,12 @@
 						sbRegistro.append("<TD>");
 						sbRegistro.append(sbLink.toString());
 						sbRegistro.append(m.getModeloAutomovel().getMarca().getNome());
+						sbRegistro.append("</a>");
+						sbRegistro.append("</TD>");
+						
+						sbRegistro.append("<TD>");
+						sbRegistro.append(sbLink.toString());
+						sbRegistro.append(m.getCondicao());
 						sbRegistro.append("</a>");
 						sbRegistro.append("</TD>");
 						

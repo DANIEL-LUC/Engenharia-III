@@ -13,13 +13,13 @@
 <title>:::: CONSULTAR MODELO::::</title>
 </head>
 <body>
-	<a href="index.jsp">Home</a>
+	<a href="index.jsp"> <h2>Home</h2></a>
 	<%
 		Resultado resultado = (Resultado) session.getAttribute("resultado");
 	%>
 
 
-	<a href="cadastrarModeloAutomovel.jsp">Novo</a>
+	<a href="cadastrarModeloAutomovel.jsp"><h2>Novo</h2></a>
 
 	<%
 		if (resultado != null && resultado.getMsg() != null) {

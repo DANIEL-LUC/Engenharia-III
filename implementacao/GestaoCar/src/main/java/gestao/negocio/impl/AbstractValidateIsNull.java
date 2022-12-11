@@ -11,8 +11,8 @@ public abstract class AbstractValidateIsNull implements IStrategy {
 		return obj == null;
 	}
 
-	protected boolean isString() {
-		return false;
+	protected boolean isEmpty(String s) {
+		return (s.equals(""));
 	}
 
 	protected boolean isBoolean() {

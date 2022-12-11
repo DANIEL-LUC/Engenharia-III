@@ -69,8 +69,6 @@ public class AutomovelVH implements IViewHelper{
 		String idModelo = request.getParameter("txtIdModelo");
 		
 
-		System.out.println("Dentro da VH MODELO NOME = " + idVendedor);
-	
 		Vendedor v = new Vendedor();
 		ModeloAutomovel model = new ModeloAutomovel();
 		if(kmRodado != null && !kmRodado.trim().equals("")){
@@ -92,6 +90,8 @@ public class AutomovelVH implements IViewHelper{
 		m.setCorExterna(cor);
 		m.setVin(vin);
 		m.setDescricao(descricao);
+		
+		
 		
 		
 
@@ -118,7 +118,7 @@ public class AutomovelVH implements IViewHelper{
 			}else if(operacao.equals("Cadastrar")){
 				resultado.setMsg("Automovel cadastrado com sucesso!");
 				request.getSession().setAttribute("resultado", resultado);
-				d= request.getRequestDispatcher("listaAutomoveis.jsp");
+				d= request.getRequestDispatcher("Resultado.jsp");
 				
 			}else if(operacao.equals("Consultar")) {
 				

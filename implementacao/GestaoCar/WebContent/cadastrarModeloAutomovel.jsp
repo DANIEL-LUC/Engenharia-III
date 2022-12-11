@@ -51,12 +51,12 @@
     <h1>Ficha técnica</h1>
     <div class="valorRith">
       <label for="name"></label>
-      <input type="number" step="0.01"placeholder="Potência CV" name="numberPotencia" id="numberPotencia" required>
+      <input type="number" step="0.01"placeholder="Potência" name="numberPotencia" id="numberPotencia" required>
     </div>
     
     <div class="valorLeft">
       <label for="name"></label>
-      <input type="number" step="0.01" placeholder="Gasto km/litro" name="numberGastoLitro" id="numberGastoLitro" required>
+      <input type="number" step="0.01" placeholder="Gasto MJ/km " name="numberGastoLitro" id="numberGastoLitro" required>
     </div>
     
     <div class="selectRight">

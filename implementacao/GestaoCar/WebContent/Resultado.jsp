@@ -23,7 +23,7 @@ request.getSession().setAttribute("resultado", resultado);
         <div class= "center">
             <div class = "logo">
                 <h2 >
-                    <a class="log" href="index.html">
+                    <a class="log" href="index.jsp">
                     
                     Cadastro não realizado
                     </a>

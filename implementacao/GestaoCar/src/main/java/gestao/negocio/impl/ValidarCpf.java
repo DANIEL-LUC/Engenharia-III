@@ -20,7 +20,7 @@ public class ValidarCpf implements IStrategy {
 				return "Digite um CPF válido";
 			}
 		}else{
-			return "Deve ser registrado um vendedor!";
+			return "Deve ser registrado um vendedogr!";
 		}
 	}
 	
